@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as PlacesRouteImport } from './routes/places'
 import { Route as PracticeRouteImport } from './routes/practice'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as TimeRouteImport } from './routes/time'
 import { Route as WorkRouteImport } from './routes/work'
@@ -37,6 +38,11 @@ const PlacesRoute = PlacesRouteImport.update({
 const PracticeRoute = PracticeRouteImport.update({
   id: '/practice',
   path: '/practice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QuizRoute = QuizRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/places': typeof PlacesRoute
   '/practice': typeof PracticeRoute
+  '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/time': typeof TimeRoute
   '/work': typeof WorkRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/places': typeof PlacesRoute
   '/practice': typeof PracticeRoute
+  '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/time': typeof TimeRoute
   '/work': typeof WorkRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/places': typeof PlacesRoute
   '/practice': typeof PracticeRoute
+  '/projects': typeof ProjectsRoute
   '/quiz': typeof QuizRoute
   '/time': typeof TimeRoute
   '/work': typeof WorkRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/places'
     | '/practice'
+    | '/projects'
     | '/quiz'
     | '/time'
     | '/work'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/places'
     | '/practice'
+    | '/projects'
     | '/quiz'
     | '/time'
     | '/work'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/places'
     | '/practice'
+    | '/projects'
     | '/quiz'
     | '/time'
     | '/work'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   PlacesRoute: typeof PlacesRoute
   PracticeRoute: typeof PracticeRoute
+  ProjectsRoute: typeof ProjectsRoute
   QuizRoute: typeof QuizRoute
   TimeRoute: typeof TimeRoute
   WorkRoute: typeof WorkRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/practice'
       fullPath: '/practice'
       preLoaderRoute: typeof PracticeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/quiz': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   PlacesRoute: PlacesRoute,
   PracticeRoute: PracticeRoute,
+  ProjectsRoute: ProjectsRoute,
   QuizRoute: QuizRoute,
   TimeRoute: TimeRoute,
   WorkRoute: WorkRoute,

@@ -108,7 +108,8 @@
     border-color: black !important;
   }
 
-  .holiday-closed {
+  .holiday-closed,
+  .sheet-closed {
     display: block !important;
   }
 
@@ -129,6 +130,7 @@
   display: none;
 }
 
-.holiday-closed {
+.holiday-closed,
+.sheet-closed {
   display: none;
 }

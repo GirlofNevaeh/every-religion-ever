@@ -1,52 +1,165 @@
-export type Stage = {
+export type YearProject = {
   id: string;
   label: string;
+  ownTitle: string;
   own: string;
+  ownSteps: string[];
+  prompts: string[];
+  draw: boolean;
+  teamTitle: string;
   team: string;
+  teamSteps: string[];
+  care: string;
 };
 
-export const STAGES: Stage[] = [
+export const YEAR_PROJECTS: YearProject[] = [
   {
     id: "p1",
     label: "Primary 1",
-    own: "Draw a pattern of stars, leaves, or lamps. Do not draw God. Do not draw Muhammad. Do not draw a Guru.",
-    team: "Practise a kind class welcome. Say hello. Offer a chair. Use a quiet voice.",
+    ownTitle: "A calm pattern",
+    own: "Draw a pattern of stars, leaves, or lamps. Use calm colours.",
+    ownSteps: ["Choose stars, leaves, or lamps.", "Draw the same shape again and again.", "Colour the pattern."],
+    prompts: ["I drew"],
+    draw: true,
+    teamTitle: "A kind welcome",
+    team: "Practise how a class can welcome a friend.",
+    teamSteps: [
+      "One person says hello.",
+      "One person offers a chair.",
+      "Everyone else uses a quiet voice.",
+      "Swap jobs and try again.",
+    ],
+    care: "Do not draw God. Do not draw Muhammad. Do not draw a Guru.",
   },
   {
     id: "p2",
     label: "Primary 2",
-    own: "Draw one place of worship from the outside. Choose a church, a mosque, a synagogue, a mandir, a temple, or a gurdwara. Draw the building, not a holy person.",
-    team: "Match each building to its name. Say one calm sentence about it.",
+    ownTitle: "A place from the outside",
+    own: "Draw one place of worship from the outside. Draw the building, not a holy person.",
+    ownSteps: [
+      "Choose a church, a mosque, a synagogue, a mandir, a temple, or a gurdwara.",
+      "Draw the outside.",
+      "Write the name of the building.",
+    ],
+    prompts: ["This building is a"],
+    draw: true,
+    teamTitle: "Name the building",
+    team: "Match each building to its faith. Say one calm sentence.",
+    teamSteps: [
+      "Lay out the six places: church, mosque, synagogue, mandir, temple, gurdwara.",
+      "Match each place to a faith.",
+      "Each person says one calm sentence about one building.",
+    ],
+    care: "Draw the building. Do not draw a holy person.",
   },
   {
     id: "p3",
     label: "Primary 3",
-    own: "Learn one greeting a family may use. You may choose Peace be with you, As-salamu alaykum, Shalom, Namaste, Sat Sri Akal, or Hello.",
+    ownTitle: "One greeting",
+    own: "Learn one greeting a family may use. Say it kindly. Do not say it as a joke.",
+    ownSteps: [
+      "Choose Peace be with you, As-salamu alaykum, Shalom, Namaste, Sat Sri Akal, or Hello.",
+      "Say it in a calm voice.",
+      "Write the greeting.",
+    ],
+    prompts: ["My greeting is", "A family may use it to say"],
+    draw: false,
+    teamTitle: "Kind acts",
     team: "Make a list of kind acts that any class can do.",
+    teamSteps: [
+      "Write three kind acts.",
+      "Check that each act can include every child.",
+      "Read the list in a quiet voice.",
+    ],
+    care: "A greeting is not a costume and not a joke.",
   },
   {
     id: "p4",
     label: "Primary 4",
-    own: "Label the festival calendar. Use the word bank. Remember that some dates move.",
-    team: "Plan a quiet visit list: voice, shoes, photos, and questions to ask.",
+    ownTitle: "One time in the year",
+    own: "Choose one festival or rest day. Write when it comes, and one thing many families do. Some dates move.",
+    ownSteps: [
+      "Choose Easter, Vaisakhi, Vesak, Ramadan, Eid, Diwali, Hanukkah, Christmas, or Shabbat.",
+      "Write the time of year. Shabbat comes every week.",
+      "Write one thing many families do.",
+    ],
+    prompts: ["I chose", "It comes", "Many families"],
+    draw: false,
+    teamTitle: "A quiet visit",
+    team: "Plan a list for a quiet visit.",
+    teamSteps: [
+      "Write the rule for voices.",
+      "Write when shoes come off, and when they stay on.",
+      "Write the rule for photos.",
+      "Write one question you may ask a host.",
+    ],
+    care: "Do not say one festival is better. Do not draw a holy person.",
   },
   {
     id: "p5",
     label: "Primary 5",
+    ownTitle: "Three sentences",
     own: "Write three sentences about one place of worship. Use the words “many people”.",
-    team: "Plan a shared snack. Include a choice for friends who do not eat some foods. Do not call any food strange.",
+    ownSteps: [
+      "Choose a church, a mosque, a synagogue, a mandir, a temple, or a gurdwara.",
+      "Write what many people call it.",
+      "Write what many people do there, and one careful rule.",
+    ],
+    prompts: ["Many people call this place a", "Many people", "A careful rule is"],
+    draw: false,
+    teamTitle: "A shared snack",
+    team: "Plan a snack with a choice for friends who do not eat some foods.",
+    teamSteps: [
+      "List foods the team can share.",
+      "Add a choice with no pork.",
+      "Add a vegetarian choice.",
+      "Do not call any food strange.",
+    ],
+    care: "Many families follow a food rule. Some do not. Both can belong.",
   },
   {
     id: "p6",
     label: "Primary 6",
-    own: "Choose two festivals. Write what many families do. Do not say which festival is better.",
-    team: "Make a guest card. Include a quiet voice, shoes when that is the custom, and asking before photos.",
+    ownTitle: "Two festivals",
+    own: "Choose two festivals. Write what many families do. Write what some families do not do.",
+    ownSteps: [
+      "Choose two festivals from the year.",
+      "For each one, write what many families do.",
+      "For each one, write something some families do not do.",
+    ],
+    prompts: ["Festival one is", "Many families", "Some families do not", "Festival two is", "Many families", "Some families do not"],
+    draw: false,
+    teamTitle: "A guest card",
+    team: "Make a card a visitor can read before they come.",
+    teamSteps: [
+      "Write “Use a quiet voice.”",
+      "Write when shoes come off.",
+      "Write “Ask before you take a photo.”",
+      "Add one kind sentence.",
+    ],
+    care: "Do not say which festival is better.",
   },
   {
     id: "p7",
     label: "Primary 7",
+    ownTitle: "A shared festival",
     own: "Write a short paragraph that shows Diwali is marked by many Hindus, many Sikhs, and many Jains.",
-    team: "Plan a kind class welcome for a visitor. Leave room for different faiths and for no religion.",
+    ownSteps: [
+      "Write that Diwali is a festival of lights in autumn.",
+      "Name the three groups of families.",
+      "Add that families tell different stories.",
+    ],
+    prompts: ["Diwali comes in", "It is marked by", "Families tell"],
+    draw: false,
+    teamTitle: "A welcome plan",
+    team: "Plan a kind welcome for a visitor. Leave room for different faiths and for no religion.",
+    teamSteps: [
+      "Choose a calm hello the whole class can use.",
+      "Plan a chair and a quiet place.",
+      "Give each person on the team one job.",
+      "Check that a child with no religion is welcome too.",
+    ],
+    care: "Leave room for families who do not follow a religion.",
   },
 ];
 

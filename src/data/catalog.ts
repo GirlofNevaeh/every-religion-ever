@@ -1,5 +1,5 @@
 import { FAITHS } from "@/data/faiths";
-import { HOLIDAY_PROJECTS } from "@/data/projects";
+import { HOLIDAY_PROJECTS, YEAR_PROJECTS } from "@/data/projects";
 import { YEAR_STEPS } from "@/data/year";
 
 export type CatalogHit = {
@@ -91,7 +91,13 @@ export function catalog(): CatalogHit[] {
     href: `/work#${project.id}`,
     text: `${project.name} ${project.faith} ${project.when} ${project.who} ${project.note} ${project.own} ${project.team} holiday holy day project class work`,
   }));
-  return [...faiths, ...steps, ...projects, ...EXTRA];
+  const years: CatalogHit[] = YEAR_PROJECTS.map((project) => ({
+    title: `${project.label} projects`,
+    kind: "Projects",
+    href: `/projects#${project.id}`,
+    text: `${project.label} ${project.ownTitle} ${project.own} ${project.teamTitle} ${project.team} ${project.care} individual team primary year project`,
+  }));
+  return [...faiths, ...steps, ...projects, ...years, ...EXTRA];
 }
 
 export function searchCatalog(query: string): CatalogHit[] {

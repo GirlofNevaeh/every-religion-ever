@@ -1,6 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { CALENDAR_SLOTS, CALENDAR_WORDS, HOLIDAY_PROJECTS, PLACE_PAIRS, STAGES } from "@/data/projects";
+import { CALENDAR_SLOTS, CALENDAR_WORDS, HOLIDAY_PROJECTS, PLACE_PAIRS } from "@/data/projects";
 import { cn } from "@/lib/cn";
 
 export const Route = createFileRoute("/work")({
@@ -16,7 +16,13 @@ function WorkPage() {
       <div className="no-print flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-4xl text-sky">Work</h1>
-          <p className="mt-2 max-w-2xl">Pages a class can print. One task on your own. One task with a team.</p>
+          <p className="mt-2 max-w-2xl">
+            Holy day pages, a festival calendar, and a places match. Year projects are on{" "}
+            <Link to="/projects" className="font-extrabold text-sky underline">
+              Projects
+            </Link>
+            .
+          </p>
         </div>
         <button
           type="button"
@@ -33,17 +39,6 @@ function WorkPage() {
       <HolidayProjects />
       <CalendarSheet />
       <MatchSheet />
-      {STAGES.map((stage) => (
-        <article key={stage.id} className="print-sheet mt-6 rounded-3xl bg-sand p-5 ring-1 ring-ink/15">
-          <h2 className="text-3xl text-sky">{stage.label}</h2>
-          <h3 className="mt-4 text-xl text-olive">On your own</h3>
-          <p className="mt-1">{stage.own}</p>
-          <div className="mt-3 h-24 rounded-xl border-2 border-dashed border-ink/30" />
-          <h3 className="mt-4 text-xl text-olive">With a team</h3>
-          <p className="mt-1">{stage.team}</p>
-          <div className="mt-3 h-24 rounded-xl border-2 border-dashed border-ink/30" />
-        </article>
-      ))}
     </main>
   );
 }

@@ -8,6 +8,7 @@ const NAV = [
   { to: "/practice", label: "Practice", exact: true },
   { to: "/time", label: "Time", exact: true },
   { to: "/quiz", label: "Quiz", exact: true },
+  { to: "/projects", label: "Projects", exact: true },
   { to: "/work", label: "Work", exact: true },
   { to: "/about", label: "About", exact: true },
 ] as const;
@@ -21,7 +22,7 @@ export function SiteHeader() {
         <Link to="/" className="font-display block text-xl leading-none text-sky sm:text-2xl">
           Every Religion Ever
         </Link>
-        <nav aria-label="Pages" className="mt-2 grid grid-cols-4 gap-1 sm:grid-cols-8">
+        <nav aria-label="Pages" className="mt-2 grid grid-cols-3 gap-1 sm:grid-cols-5 lg:grid-cols-9">
           {NAV.map((item) => {
             const active = item.exact
               ? pathname === item.to
@@ -32,7 +33,7 @@ export function SiteHeader() {
                 to={item.to}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "flex min-h-11 min-w-0 items-center justify-center rounded-lg px-1 text-center text-xs font-extrabold whitespace-nowrap",
+                  "flex min-h-11 min-w-0 items-center justify-center rounded-lg px-1 text-center text-[11px] leading-tight font-extrabold sm:text-xs",
                   active ? "bg-sky text-sand" : "bg-sand text-ink ring-1 ring-ink/15",
                 )}
               >
