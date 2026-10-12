@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { BookStandIcon, KhandaIcon } from "@/components/symbols";
 import { PhotoCredit } from "@/components/photo-credit";
 import { faithById, type Faith } from "@/data/faiths";
+import { figureForFaith } from "@/data/figures";
 
 export const Route = createFileRoute("/faiths/$faithId")({
   head: ({ params }) => {
@@ -30,6 +31,7 @@ function FaithRoute() {
 }
 
 function FaithPage({ faith }: { faith: Faith }) {
+  const figure = figureForFaith(faith.id);
   const facts = [
     { label: "What many people call it", body: faith.called },
     { label: "A belief many people hold", body: faith.belief },
@@ -53,6 +55,11 @@ function FaithPage({ faith }: { faith: Faith }) {
         />
         <PhotoCredit credit={faith.credit} />
       </figure>
+      <p className="mt-4">
+        <Link to="/people" hash={figure.id} className="font-extrabold text-sky underline">
+          Profile: {figure.name}
+        </Link>
+      </p>
       <p className="mt-4 flex items-center gap-3 text-base">
         <BookStandIcon className="size-10 shrink-0 text-olive" />
         <span>{faith.greeting}</span>

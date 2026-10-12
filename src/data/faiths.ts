@@ -57,7 +57,7 @@ export const FAITHS: Faith[] = [
     kind: "Many Christians try to love their neighbour. That means helping people, telling the truth, and sharing.",
     rule: "Some Christians fast in a time called Lent. They may eat less, or give something up, before Easter. Some do not. Some churches share bread and a cup in worship. Some do not do this every week. In some churches people dress in a careful way. Practices differ from family to family.",
     pictures:
-      "A church, a cross, a Bible, or a candle stands for this faith.",
+      "A church, a cross, a Bible, or a candle can stand for this faith. Some Christian pictures show God as a kind wise man with a white beard. Many churches show Jesus instead. Some show neither.",
     greeting: "Many Christians say, “Peace be with you.”",
     image: church,
     imageAlt: "A stone church with a pointed spire, a slate roof, and flint walls.",
@@ -106,7 +106,7 @@ export const FAITHS: Faith[] = [
       "Shabbat is a weekly rest. It begins on Friday evening and ends on Saturday evening. Many Jews light candles, share a meal, and stop everyday work. Some families eat a special bread. Hanukkah is a festival of lights in late autumn or winter. It lasts eight nights. Many families light a hanukkiah, a special lamp. People tell a story of a small amount of oil that burned for eight days. Some children play a small spinning game.",
     kind: "Many Jews give tzedakah. That is help for people in need. It is part of doing what is right.",
     rule: "Kosher is a food rule. Many Jews do not eat pork or shellfish. Many do not mix meat and milk. Some families keep kosher. Some do not. Both can be Jewish. Some Jews cover their heads with a kippah. Some do this in the synagogue. Some do this all day. Some do not. A kippah is not a costume.",
-    pictures: "Many Jews do not make pictures of God.",
+    pictures: "Many Jews do not make pictures of God. Some story books show Moses. Some families do not.",
     greeting: "Many Jews say, “Shalom.” It means peace.",
     image: synagogue,
     imageAlt: "A brick synagogue with a large round window and a carved doorway.",
@@ -184,7 +184,7 @@ export const FAITHS: Faith[] = [
     kind: "Seva means selfless service. Many Sikhs cook, clean, and share. Honest work and sharing are part of the faith.",
     rule: "Many Sikhs wear the Five Ks. They are articles of faith, not a costume. Kesh means uncut hair. Many people cover it with a turban or a smaller cloth. A turban is worn with respect. It is not a dress-up joke. Kangha is a small wooden comb. Kara is a steel bracelet. Kachera is an undergarment chosen for modesty. Kirpan is a small sword. It stands for courage and for protecting others. It is not a toy. Do not touch it. Some Sikhs wear all five. Some do not. Langar is often vegetarian, so more people can eat. Some Sikhs eat meat at home. Practices differ.",
     pictures:
-      "Sikhs do not make pictures of the Gurus. The Guru Granth Sahib is a holy book. The Khanda is a symbol. A turban is worn with respect.",
+      "The Guru Granth Sahib is the Guru for Sikhs today. Some homes keep a picture of Guru Nanak. It is not worshipped. Some families do not use pictures.",
     greeting: "Many Sikhs say, “Sat Sri Akal.” It speaks of God’s truth.",
     image: gurdwara,
     imageAlt: "The Golden Temple at night, lit gold beside a pool.",

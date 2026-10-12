@@ -4,6 +4,7 @@ import { cn } from "@/lib/cn";
 const NAV = [
   { to: "/", label: "Home", exact: true },
   { to: "/faiths", label: "Faiths", exact: false },
+  { to: "/people", label: "People", exact: true },
   { to: "/places", label: "Places", exact: true },
   { to: "/practice", label: "Practice", exact: true },
   { to: "/time", label: "Time", exact: true },
@@ -22,7 +23,7 @@ export function SiteHeader() {
         <Link to="/" className="font-display block text-xl leading-none text-sky sm:text-2xl">
           Every Religion Ever
         </Link>
-        <nav aria-label="Pages" className="mt-2 grid grid-cols-3 gap-1 sm:grid-cols-5 lg:grid-cols-9">
+        <nav aria-label="Pages" className="mt-2 grid grid-cols-3 gap-1 sm:grid-cols-5 lg:grid-cols-10">
           {NAV.map((item) => {
             const active = item.exact
               ? pathname === item.to

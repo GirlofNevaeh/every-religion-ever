@@ -66,6 +66,17 @@ export const PHOTO_CREDITS: PhotoCredit[] = [
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:The_Golden_Temple-_Harmandir_Sahib_is_the_holiest_place_for_the_Sikhs_(38222811534).jpg",
   },
+  {
+    id: "lamp",
+    title: "Mosque lamp, Syria or Egypt, about 1360",
+    author: "Vassil",
+    authorUrl: "https://commons.wikimedia.org/wiki/User:Vassil",
+    license: "CC0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:British_Museum_The_Islamic_world_Mosque_lamp_Enamelled_and_gilded_glass_Syria_or_Egypt_About_1360_21022019_7585.jpg",
+    note: "Shown here smaller. The museum label was cropped.",
+  },
 ];
 
 export function photoCredit(id: string): PhotoCredit {

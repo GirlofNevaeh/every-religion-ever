@@ -1,4 +1,5 @@
 import { FAITHS } from "@/data/faiths";
+import { FIGURES } from "@/data/figures";
 import { HOLIDAY_PROJECTS, YEAR_PROJECTS } from "@/data/projects";
 import { YEAR_STEPS } from "@/data/year";
 
@@ -97,7 +98,13 @@ export function catalog(): CatalogHit[] {
     href: `/projects#${project.id}`,
     text: `${project.label} ${project.ownTitle} ${project.own} ${project.teamTitle} ${project.team} ${project.care} individual team primary year project`,
   }));
-  return [...faiths, ...steps, ...projects, ...years, ...EXTRA];
+  const figures: CatalogHit[] = FIGURES.map((figure) => ({
+    title: figure.name,
+    kind: "People",
+    href: `/people#${figure.id}`,
+    text: `${figure.name} ${figure.faithName} ${figure.paragraphs.join(" ")} profile teacher`,
+  }));
+  return [...faiths, ...figures, ...steps, ...projects, ...years, ...EXTRA];
 }
 
 export function searchCatalog(query: string): CatalogHit[] {

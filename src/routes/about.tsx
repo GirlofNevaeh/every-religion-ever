@@ -64,7 +64,8 @@ function AboutPage() {
         <h2 className="text-3xl text-sky">Photo credits</h2>
         <p className="mt-2">
           Buildings and objects are real photos. Each photo names its maker and its licence. People are drawn, not
-          photographed. The drawing shows an adult and two children sharing food.
+          photographed. The drawings show God, Jesus, Moses, Krishna, the Buddha, Guru Nanak, and a family sharing food.
+          Muhammad is not drawn. Many Jews, Muslims, and Sikhs do not draw God.
         </p>
         <ul className="mt-4 space-y-3">
           {PHOTO_CREDITS.map((credit) => (
