@@ -60,7 +60,7 @@ export const FAITHS: Faith[] = [
       "A church, a cross, a Bible, or a candle stands for this faith.",
     greeting: "Many Christians say, “Peace be with you.”",
     image: church,
-    imageAlt: "A wooden church with a red tiled roof and dark timber walls.",
+    imageAlt: "A stone church with a pointed spire, a slate roof, and flint walls.",
     credit: photoCredit("church"),
     keywords:
       "christian christians jesus bible church cathedral chapel sunday christmas easter lent cross candle worship gospel catholic protestant orthodox",

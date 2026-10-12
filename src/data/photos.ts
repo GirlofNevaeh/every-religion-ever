@@ -12,13 +12,14 @@ export type PhotoCredit = {
 export const PHOTO_CREDITS: PhotoCredit[] = [
   {
     id: "church",
-    title: "Church of St Andrew, Greensted — nave and south porch",
-    author: "Acabashi",
+    title: "Parish Church of St Michael the Archangel, Cuckmere Valley",
+    author: "Michael Coppins",
+    authorUrl: "https://commons.wikimedia.org/wiki/User:Michael_Coppins",
     license: "CC BY-SA 4.0",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
     sourceUrl:
-      "https://commons.wikimedia.org/wiki/File:%27Church_of_St_Andrew%27_Greensted,_Ongar,_Essex_England_-_nave_and_south_porch.JPG",
-    note: "Shown here smaller. The lower churchyard was cropped.",
+      "https://commons.wikimedia.org/wiki/File:Cuckmere_Valley_-_The_Parish_Church_of_St_Michael_the_Archangel_-_20230417133233.jpg",
+    note: "Shown here smaller.",
   },
   {
     id: "mosque",
