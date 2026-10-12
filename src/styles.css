@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sky: #1b4f72;
+  --color-sand: #f8f1e3;
+  --color-olive: #3d6b4f;
+  --color-gold: #e6c36a;
+  --color-ink: #1a1a1a;
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: clip;
+    background: var(--color-sand);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+    line-height: 1.15;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-sky);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  section[id] {
+    scroll-margin-top: 11rem;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  z-index: 80;
+  background: var(--color-gold);
+  color: var(--color-ink);
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.75rem;
+  font-weight: 800;
+}
+
+.skip-link:focus {
+  left: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .print-sheet {
+    break-after: page;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  .holiday-closed {
+    display: block !important;
+  }
+
+  body[data-print-sheet] .print-sheet {
+    display: none !important;
+  }
+
+  body[data-print-sheet] .print-keep {
+    display: block !important;
+  }
+
+  body[data-print-sheet] .hide-single-print {
+    display: none !important;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+.holiday-closed {
+  display: none;
+}
