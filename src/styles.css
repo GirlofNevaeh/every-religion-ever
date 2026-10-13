@@ -34,6 +34,13 @@
     line-height: 1.15;
   }
 
+  html[lang="ru"] h1,
+  html[lang="ru"] h2,
+  html[lang="ru"] h3,
+  html[lang="ru"] .font-display {
+    font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;

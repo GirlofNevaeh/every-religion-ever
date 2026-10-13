@@ -1,3 +1,5 @@
+import type { LocaleId } from "@/i18n/locales";
+import { embedTranslations } from "@/i18n/dictionaries";
 import { FAITHS } from "@/data/faiths";
 import { FIGURES } from "@/data/figures";
 import { HOLIDAY_PROJECTS, YEAR_PROJECTS } from "@/data/projects";
@@ -78,7 +80,7 @@ export function catalog(): CatalogHit[] {
     title: faith.name,
     kind: "Faith",
     href: `/faiths/${faith.id}`,
-    text: `${faith.name} ${faith.people} ${faith.card} ${faith.bookTitle} ${faith.placeTitle} ${faith.festivalTitle} ${faith.keywords}`,
+    text: `${faith.name} ${faith.people} ${faith.card} ${faith.called} ${faith.belief} ${faith.bookTitle} ${faith.book} ${faith.placeTitle} ${faith.place} ${faith.festivalTitle} ${faith.festival} ${faith.kind} ${faith.rule} ${faith.pictures} ${faith.greeting} ${faith.imageAlt} ${faith.keywords}`,
   }));
   const steps: CatalogHit[] = YEAR_STEPS.map((step) => ({
     title: step.name,
@@ -107,7 +109,11 @@ export function catalog(): CatalogHit[] {
   return [...faiths, ...figures, ...steps, ...projects, ...years, ...EXTRA];
 }
 
-export function searchCatalog(query: string): CatalogHit[] {
+export function searchCatalog(
+  query: string,
+  tr: (text: string) => string = (text) => text,
+  locale: LocaleId = "en",
+): CatalogHit[] {
   const words = query
     .toLowerCase()
     .replace(/['’]/g, "")
@@ -116,7 +122,10 @@ export function searchCatalog(query: string): CatalogHit[] {
     .filter(Boolean);
   if (words.length === 0) return [];
   return catalog().filter((item) => {
-    const hay = `${item.title} ${item.kind} ${item.text}`.toLowerCase().replace(/['’]/g, "");
+    const english = `${item.title} ${item.kind} ${item.text}`;
+    const hay = `${english} ${tr(item.title)} ${tr(item.kind)} ${embedTranslations(locale, english)}`
+      .toLowerCase()
+      .replace(/['’]/g, "");
     return words.every((word) => hay.includes(word));
   });
 }

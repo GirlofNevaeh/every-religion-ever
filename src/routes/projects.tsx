@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { YEAR_PROJECTS } from "@/data/projects";
+import { useTr } from "@/i18n/locale";
 import { cn } from "@/lib/cn";
 
 export const Route = createFileRoute("/projects")({
@@ -9,6 +10,7 @@ export const Route = createFileRoute("/projects")({
 });
 
 function ProjectsPage() {
+  const tr = useTr();
   const [open, setOpen] = useState(YEAR_PROJECTS[0].id);
 
   useEffect(() => {
@@ -47,9 +49,9 @@ function ProjectsPage() {
     <main id="content" className="mx-auto w-full max-w-5xl px-4 py-6">
       <div className="no-print flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-4xl text-sky">Projects</h1>
+          <h1 className="text-4xl text-sky">{tr("Projects")}</h1>
           <p className="mt-2 max-w-2xl">
-            Primary 1 to Primary 7. One task on your own. One task with a team.
+            {tr("Primary 1 to Primary 7. One task on your own. One task with a team.")}
           </p>
         </div>
         <button
@@ -57,7 +59,7 @@ function ProjectsPage() {
           onClick={printAll}
           className="min-h-11 rounded-xl bg-gold px-4 py-3 font-extrabold text-ink"
         >
-          Print
+          {tr("Print")}
         </button>
       </div>
       <div className="no-print mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -72,7 +74,7 @@ function ProjectsPage() {
               open === project.id ? "bg-sky text-sand" : "bg-sand text-ink ring-1 ring-ink/15",
             )}
           >
-            {project.label}
+            {tr(project.label)}
           </button>
         ))}
       </div>
@@ -87,23 +89,23 @@ function ProjectsPage() {
           )}
         >
           <p className="text-sm font-extrabold text-olive">Every Religion Ever</p>
-          <h2 className="mt-1 text-3xl text-sky">{project.label}</h2>
+          <h2 className="mt-1 text-3xl text-sky">{tr(project.label)}</h2>
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             <p>
-              Name <span className="inline-block min-w-40 border-b border-ink/40">{"\u00a0"}</span>
+              {tr("Name")} <span className="inline-block min-w-40 border-b border-ink/40">{"\u00a0"}</span>
             </p>
             <p>
-              Class <span className="inline-block min-w-40 border-b border-ink/40">{"\u00a0"}</span>
+              {tr("Class")} <span className="inline-block min-w-40 border-b border-ink/40">{"\u00a0"}</span>
             </p>
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-2">
             <section>
-              <h3 className="text-xl text-olive">On your own</h3>
-              <p className="mt-1 font-bold">{project.ownTitle}</p>
-              <p className="mt-1">{project.own}</p>
+              <h3 className="text-xl text-olive">{tr("On your own")}</h3>
+              <p className="mt-1 font-bold">{tr(project.ownTitle)}</p>
+              <p className="mt-1">{tr(project.own)}</p>
               <ol className="mt-3 list-decimal space-y-1 pl-5">
                 {project.ownSteps.map((step) => (
-                  <li key={step}>{step}</li>
+                  <li key={step}>{tr(step)}</li>
                 ))}
               </ol>
               {project.draw ? (
@@ -112,40 +114,40 @@ function ProjectsPage() {
               <ul className="mt-3 space-y-3">
                 {project.prompts.map((prompt, index) => (
                   <li key={`${prompt}-${index}`}>
-                    <p>{prompt}</p>
+                    <p>{tr(prompt)}</p>
                     <div className="mt-1 h-10 border-b border-ink/40" />
                   </li>
                 ))}
               </ul>
             </section>
             <section>
-              <h3 className="text-xl text-olive">With a team</h3>
-              <p className="mt-1 font-bold">{project.teamTitle}</p>
-              <p className="mt-1">{project.team}</p>
+              <h3 className="text-xl text-olive">{tr("With a team")}</h3>
+              <p className="mt-1 font-bold">{tr(project.teamTitle)}</p>
+              <p className="mt-1">{tr(project.team)}</p>
               <ol className="mt-3 space-y-3">
                 {project.teamSteps.map((step) => (
                   <li key={step} className="flex items-start gap-3">
                     <span className="mt-1 h-5 w-5 shrink-0 rounded border-2 border-ink" aria-hidden="true" />
-                    <span className="min-w-0">{step}</span>
+                    <span className="min-w-0">{tr(step)}</span>
                   </li>
                 ))}
               </ol>
             </section>
           </div>
-          <p className="mt-5 rounded-xl bg-gold px-3 py-3 font-bold text-ink">{project.care}</p>
+          <p className="mt-5 rounded-xl bg-gold px-3 py-3 font-bold text-ink">{tr(project.care)}</p>
           <button
             type="button"
             onClick={() => printThis(project.id)}
             className="no-print mt-4 min-h-11 rounded-xl bg-gold px-4 py-2 font-extrabold text-ink"
           >
-            Print this project
+            {tr("Print this project")}
           </button>
         </article>
       ))}
       <p className="no-print mt-6 text-sm">
-        Holy day pages are on{" "}
+        {tr("Holy day pages are on")}{" "}
         <Link to="/work" className="font-extrabold text-sky underline">
-          Work
+          {tr("Work")}
         </Link>
         .
       </p>

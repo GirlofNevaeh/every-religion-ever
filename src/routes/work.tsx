@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { CALENDAR_SLOTS, CALENDAR_WORDS, HOLIDAY_PROJECTS, PLACE_PAIRS } from "@/data/projects";
+import { useTr } from "@/i18n/locale";
 import { cn } from "@/lib/cn";
 
 export const Route = createFileRoute("/work")({
@@ -11,15 +12,16 @@ export const Route = createFileRoute("/work")({
 const FAITH_CHOICES = ["Buddhism", "Christianity", "Hinduism", "Islam", "Judaism", "Sikhism"];
 
 function WorkPage() {
+  const tr = useTr();
   return (
     <main id="content" className="mx-auto w-full max-w-5xl px-4 py-6">
       <div className="no-print flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-4xl text-sky">Work</h1>
+          <h1 className="text-4xl text-sky">{tr("Work")}</h1>
           <p className="mt-2 max-w-2xl">
-            Holy day pages, a festival calendar, and a places match. Year projects are on{" "}
+            {tr("Holy day pages, a festival calendar, and a places match. Year projects are on")}{" "}
             <Link to="/projects" className="font-extrabold text-sky underline">
-              Projects
+              {tr("Projects")}
             </Link>
             .
           </p>
@@ -33,7 +35,7 @@ function WorkPage() {
           }}
           className="min-h-11 rounded-xl bg-gold px-4 py-3 font-extrabold text-ink"
         >
-          Print
+          {tr("Print")}
         </button>
       </div>
       <HolidayProjects />
@@ -44,6 +46,7 @@ function WorkPage() {
 }
 
 function CalendarSheet() {
+  const tr = useTr();
   const [selected, setSelected] = useState<string | null>(null);
   const [placed, setPlaced] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(false);
@@ -67,10 +70,10 @@ function CalendarSheet() {
 
   return (
     <section className="print-sheet mt-6 rounded-3xl bg-sand p-5 ring-1 ring-ink/15">
-      <h2 className="text-3xl text-sky">Festival calendar</h2>
-      <p className="mt-2">Label each time. Some dates move. Shabbat comes every week.</p>
+      <h2 className="text-3xl text-sky">{tr("Festival calendar")}</h2>
+      <p className="mt-2">{tr("Label each time. Some dates move. Shabbat comes every week.")}</p>
       <div className="no-print mt-4">
-        <p className="font-bold">Word bank. Choose a word, then choose a time.</p>
+        <p className="font-bold">{tr("Word bank. Choose a word, then choose a time.")}</p>
         <div className="mt-2 flex flex-wrap gap-2">
           {CALENDAR_WORDS.map((word) => (
             <button
@@ -84,7 +87,7 @@ function CalendarSheet() {
                 used.has(word) ? "opacity-40" : "",
               )}
             >
-              {word}
+              {tr(word)}
             </button>
           ))}
         </div>
@@ -105,8 +108,8 @@ function CalendarSheet() {
                   off ? "ring-2 ring-ink" : "",
                 )}
               >
-                <span className="min-w-0">{slot.label}</span>
-                <span className="shrink-0 font-extrabold">{value ?? "______"}</span>
+                <span className="min-w-0">{tr(slot.label)}</span>
+                <span className="shrink-0 font-extrabold">{value ? tr(value) : "______"}</span>
               </button>
             </li>
           );
@@ -119,7 +122,7 @@ function CalendarSheet() {
           onClick={() => setChecked(true)}
           disabled={!allFilled}
         >
-          Check
+          {tr("Check")}
         </button>
         <button
           type="button"
@@ -130,20 +133,21 @@ function CalendarSheet() {
             setSelected(null);
           }}
         >
-          Clear
+          {tr("Clear")}
         </button>
       </div>
       {checked ? (
-        <p className="mt-3 font-bold">{allRight ? "These labels match." : "Look again. Some labels need a new place."}</p>
+        <p className="mt-3 font-bold">{allRight ? tr("These labels match.") : tr("Look again. Some labels need a new place.")}</p>
       ) : null}
       <div className="print-only mt-4">
-        <p className="font-bold">Word bank: {CALENDAR_WORDS.join(", ")}</p>
+        <p className="font-bold">{tr("Word bank")}: {CALENDAR_WORDS.map((word) => tr(word)).join(", ")}</p>
       </div>
     </section>
   );
 }
 
 function MatchSheet() {
+  const tr = useTr();
   const [place, setPlace] = useState<string | null>(null);
   const [pairs, setPairs] = useState<Record<string, string>>({});
   const [checked, setChecked] = useState(false);
@@ -152,11 +156,11 @@ function MatchSheet() {
 
   return (
     <section className="print-sheet mt-6 rounded-3xl bg-sand p-5 ring-1 ring-ink/15">
-      <h2 className="text-3xl text-sky">Places of worship</h2>
-      <p className="mt-2">Match the place to the faith. On paper, draw a line.</p>
+      <h2 className="text-3xl text-sky">{tr("Places of worship")}</h2>
+      <p className="mt-2">{tr("Match the place to the faith. On paper, draw a line.")}</p>
       <div className="no-print mt-4 grid gap-4 sm:grid-cols-2">
         <div>
-          <h3 className="font-display text-xl text-olive">Place</h3>
+          <h3 className="font-display text-xl text-olive">{tr("Place")}</h3>
           <div className="mt-2 flex flex-col gap-2">
             {PLACE_PAIRS.map((pair) => (
               <button
@@ -168,14 +172,16 @@ function MatchSheet() {
                   place === pair.place ? "bg-gold text-ink" : "bg-sand text-ink ring-1 ring-ink/20",
                 )}
               >
-                {pair.place}
-                {pairs[pair.place] ? <span className="mt-1 block text-sm font-bold">with {pairs[pair.place]}</span> : null}
+                {tr(pair.place)}
+                {pairs[pair.place] ? (
+                  <span className="mt-1 block text-sm font-bold">{tr("with {name}", { name: tr(pairs[pair.place]) })}</span>
+                ) : null}
               </button>
             ))}
           </div>
         </div>
         <div>
-          <h3 className="font-display text-xl text-olive">Faith</h3>
+          <h3 className="font-display text-xl text-olive">{tr("Faith")}</h3>
           <div className="mt-2 flex flex-col gap-2">
             {FAITH_CHOICES.map((faith) => (
               <button
@@ -189,7 +195,7 @@ function MatchSheet() {
                 }}
                 className="min-h-11 rounded-xl bg-sand px-3 py-2 text-left font-extrabold text-ink ring-1 ring-ink/20"
               >
-                {faith}
+                {tr(faith)}
               </button>
             ))}
           </div>
@@ -199,14 +205,14 @@ function MatchSheet() {
         <ul>
           {PLACE_PAIRS.map((pair) => (
             <li key={pair.place} className="border-b border-black py-3">
-              {pair.place}
+              {tr(pair.place)}
             </li>
           ))}
         </ul>
         <ul>
           {FAITH_CHOICES.map((faith) => (
             <li key={faith} className="border-b border-black py-3">
-              {faith}
+              {tr(faith)}
             </li>
           ))}
         </ul>
@@ -218,7 +224,7 @@ function MatchSheet() {
           onClick={() => setChecked(true)}
           className="min-h-11 rounded-xl bg-sky px-4 py-2 font-extrabold text-sand"
         >
-          Check
+          {tr("Check")}
         </button>
         <button
           type="button"
@@ -229,7 +235,7 @@ function MatchSheet() {
           }}
           className="min-h-11 rounded-xl bg-sand px-4 py-2 font-extrabold text-ink ring-1 ring-ink/20"
         >
-          Clear
+          {tr("Clear")}
         </button>
       </div>
       {checked ? (
@@ -237,11 +243,11 @@ function MatchSheet() {
           {PLACE_PAIRS.map((pair) => (
             <li key={pair.place}>
               {pairs[pair.place] === pair.faith
-                ? `${pair.place} matches.`
-                : `${pair.place}: look again.`}
+                ? tr("{place} matches.", { place: tr(pair.place) })
+                : tr("{place}: look again.", { place: tr(pair.place) })}
             </li>
           ))}
-          {allRight ? <li className="font-bold">These places match.</li> : null}
+          {allRight ? <li className="font-bold">{tr("These places match.")}</li> : null}
         </ul>
       ) : null}
     </section>
@@ -249,6 +255,7 @@ function MatchSheet() {
 }
 
 function HolidayProjects() {
+  const tr = useTr();
   const [open, setOpen] = useState(HOLIDAY_PROJECTS[0].id);
 
   useEffect(() => {
@@ -282,9 +289,9 @@ function HolidayProjects() {
 
   return (
     <section id="holiday-projects" className="mt-6">
-      <h2 className="hide-single-print text-3xl text-sky">Holy day projects</h2>
+      <h2 className="hide-single-print text-3xl text-sky">{tr("Holy day projects")}</h2>
       <p className="hide-single-print mt-2 max-w-2xl">
-        One project for each major holy day. Shabbat comes every week.
+        {tr("One project for each major holy day. Shabbat comes every week.")}
       </p>
       <div className="no-print mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {HOLIDAY_PROJECTS.map((project) => (
@@ -298,7 +305,7 @@ function HolidayProjects() {
               open === project.id ? "bg-sky text-sand" : "bg-sand text-ink ring-1 ring-ink/15",
             )}
           >
-            {project.name}
+            {tr(project.name)}
           </button>
         ))}
       </div>
@@ -313,48 +320,48 @@ function HolidayProjects() {
           )}
         >
           <p className="text-sm font-extrabold text-olive">Every Religion Ever</p>
-          <h2 className="mt-1 text-3xl text-sky">{project.name}</h2>
+          <h2 className="mt-1 text-3xl text-sky">{tr(project.name)}</h2>
           <p className="mt-2 font-bold">
-            {project.faith}. {project.when}
+            {tr(project.faith)}. {tr(project.when)}
           </p>
-          <p>{project.who}</p>
-          <p className="mt-3">{project.note}</p>
+          <p>{tr(project.who)}</p>
+          <p className="mt-3">{tr(project.note)}</p>
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             <p>
-              Name <span className="inline-block min-w-40 border-b border-ink/40">{"\u00a0"}</span>
+              {tr("Name")} <span className="inline-block min-w-40 border-b border-ink/40">{"\u00a0"}</span>
             </p>
             <p>
-              Class <span className="inline-block min-w-40 border-b border-ink/40">{"\u00a0"}</span>
+              {tr("Class")} <span className="inline-block min-w-40 border-b border-ink/40">{"\u00a0"}</span>
             </p>
           </div>
-          <h3 className="mt-4 text-xl text-olive">On your own</h3>
-          <p className="mt-1">{project.own}</p>
+          <h3 className="mt-4 text-xl text-olive">{tr("On your own")}</h3>
+          <p className="mt-1">{tr(project.own)}</p>
           <div className="mt-3 h-24 rounded-xl border-2 border-dashed border-ink/30" />
           <ul className="mt-3 space-y-3">
             {project.prompts.map((prompt) => (
               <li key={prompt}>
-                <p>{prompt}</p>
+                <p>{tr(prompt)}</p>
                 <div className="mt-1 h-10 border-b border-ink/40" />
               </li>
             ))}
           </ul>
-          <h3 className="mt-4 text-xl text-olive">With a team</h3>
-          <p className="mt-1">{project.team}</p>
+          <h3 className="mt-4 text-xl text-olive">{tr("With a team")}</h3>
+          <p className="mt-1">{tr(project.team)}</p>
           <ol className="mt-3 space-y-3">
             {project.steps.map((step) => (
               <li key={step} className="flex items-start gap-3">
                 <span className="mt-1 h-5 w-5 shrink-0 rounded border-2 border-ink" aria-hidden="true" />
-                <span className="min-w-0">{step}</span>
+                <span className="min-w-0">{tr(step)}</span>
               </li>
             ))}
           </ol>
-          <p className="mt-4 rounded-xl bg-gold px-3 py-3 font-bold text-ink">{project.care}</p>
+          <p className="mt-4 rounded-xl bg-gold px-3 py-3 font-bold text-ink">{tr(project.care)}</p>
           <button
             type="button"
             onClick={() => printThis(project.id)}
             className="no-print mt-4 min-h-11 rounded-xl bg-gold px-4 py-2 font-extrabold text-ink"
           >
-            Print this project
+            {tr("Print this project")}
           </button>
         </article>
       ))}

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import meal from "@/assets/meal.jpg";
+import { useTr } from "@/i18n/locale";
 
 export const Route = createFileRoute("/practice")({
   head: () => ({ meta: [{ title: "Practice · Every Religion Ever" }] }),
@@ -61,30 +62,31 @@ const BANDS = [
 ];
 
 function PracticePage() {
+  const tr = useTr();
   return (
     <main id="content">
       <div className="mx-auto w-full max-w-5xl px-4 py-6">
-        <h1 className="text-4xl text-sky">Practice</h1>
-        <p className="mt-2 max-w-2xl">What many families do. Not every family does each thing.</p>
+        <h1 className="text-4xl text-sky">{tr("Practice")}</h1>
+        <p className="mt-2 max-w-2xl">{tr("What many families do. Not every family does each thing.")}</p>
       </div>
       {BANDS.map((band) => (
         <section key={band.id} id={band.id} className={band.tone}>
           <div className="mx-auto w-full max-w-5xl px-4 py-8">
-            <h2 className="text-3xl">{band.title}</h2>
+            <h2 className="text-3xl">{tr(band.title)}</h2>
             <div className="mt-4 max-w-3xl space-y-3 text-lg">
               {band.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}>{tr(paragraph)}</p>
               ))}
             </div>
             {band.id === "kindness" ? (
               <figure className="mt-6 max-w-3xl">
                 <img
                   src={meal}
-                  alt="A drawing of an adult and two children sharing bread, watermelon, and water."
+                  alt={tr("A drawing of an adult and two children sharing bread, watermelon, and water.")}
                   className="aspect-[3/2] w-full rounded-3xl object-cover"
                 />
                 <p className="mt-2 text-xs leading-snug">
-                  Drawing of an adult and two children sharing food. Not a photograph.
+                  {tr("Drawing of an adult and two children sharing food. Not a photograph.")}
                 </p>
               </figure>
             ) : null}

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { drawFresh, mulberry32, pickQuestions, type PlayCard } from "@/data/questions";
+import { useTr } from "@/i18n/locale";
 import { cn } from "@/lib/cn";
 
 type Team = { id: string; name: string; size: number; score: number };
@@ -27,11 +28,13 @@ type PlayoffState = {
   phase: "ask" | "feedback";
 };
 
+type DoneNote = { key: string; name?: string };
+
 type Screen =
   | { name: "setup" }
   | { name: "main"; main: MainState }
   | { name: "playoff"; main: MainState; playoff: PlayoffState }
-  | { name: "done"; main: MainState; draw: boolean; note: string };
+  | { name: "done"; main: MainState; draw: boolean; note: DoneNote };
 
 function leaders(teams: Team[]) {
   const top = Math.max(...teams.map((team) => team.score));
@@ -43,6 +46,7 @@ function teamName(teams: Team[], id: string) {
 }
 
 export function QuizGame() {
+  const tr = useTr();
   const [length, setLength] = useState<LengthMode>("quick");
   const [who, setWho] = useState<WhoMode>("solo");
   const [draft, setDraft] = useState<Team[]>([
@@ -85,7 +89,7 @@ export function QuizGame() {
       if (tied.length > 1) {
         const card = freshCard();
         if (!card) {
-          return { name: "done", main, draw: true, note: "It is a draw. Every team did careful work." };
+          return { name: "done", main, draw: true, note: { key: "It is a draw. Every team did careful work." } };
         }
         return {
           name: "playoff",
@@ -98,10 +102,12 @@ export function QuizGame() {
         name: "done",
         main,
         draw: false,
-        note: leader ? `${leader.name} is ahead. Every team did careful work.` : "Every team did careful work.",
+        note: leader
+          ? { key: "{name} is ahead. Every team did careful work.", name: leader.name }
+          : { key: "Every team did careful work." },
       };
     }
-    return { name: "done", main, draw: false, note: "" };
+    return { name: "done", main, draw: false, note: { key: "" } };
   }
 
   function afterPlayoff(main: MainState, playoff: PlayoffState): Screen {
@@ -125,7 +131,9 @@ export function QuizGame() {
         name: "done",
         main: nextMain,
         draw: false,
-        note: leader ? `${leader.name} is ahead. Every team did careful work.` : "Every team did careful work.",
+        note: leader
+          ? { key: "{name} is ahead. Every team did careful work.", name: leader.name }
+          : { key: "Every team did careful work." },
       };
     }
     const clean = allSame ? playoff.clean + 1 : 0;
@@ -134,12 +142,12 @@ export function QuizGame() {
         name: "done",
         main: nextMain,
         draw: true,
-        note: "It is a draw after three tied rounds. Every team did careful work.",
+        note: { key: "It is a draw after three tied rounds. Every team did careful work." },
       };
     }
     const card = freshCard();
     if (!card) {
-      return { name: "done", main: nextMain, draw: true, note: "It is a draw. Every team did careful work." };
+      return { name: "done", main: nextMain, draw: true, note: { key: "It is a draw. Every team did careful work." } };
     }
     return {
       name: "playoff",
@@ -230,38 +238,38 @@ export function QuizGame() {
     return (
       <section className="mt-5 space-y-5">
         <fieldset>
-          <legend className="font-display text-2xl text-sky">How long?</legend>
+          <legend className="font-display text-2xl text-sky">{tr("How long?")}</legend>
           <div className="mt-2 grid grid-cols-2 gap-2">
-            <Choice on={length === "quick"} onClick={() => setLength("quick")} label="Quick 10" />
-            <Choice on={length === "mega"} onClick={() => setLength("mega")} label="Mega 25" />
+            <Choice on={length === "quick"} onClick={() => setLength("quick")} label={tr("Quick 10")} />
+            <Choice on={length === "mega"} onClick={() => setLength("mega")} label={tr("Mega 25")} />
           </div>
         </fieldset>
         <fieldset>
-          <legend className="font-display text-2xl text-sky">Who plays?</legend>
+          <legend className="font-display text-2xl text-sky">{tr("Who plays?")}</legend>
           <div className="mt-2 grid grid-cols-2 gap-2">
-            <Choice on={who === "solo"} onClick={() => setWho("solo")} label="Solo" />
-            <Choice on={who === "teams"} onClick={() => setWho("teams")} label="Teams" />
+            <Choice on={who === "solo"} onClick={() => setWho("solo")} label={tr("Solo")} />
+            <Choice on={who === "teams"} onClick={() => setWho("teams")} label={tr("Teams")} />
           </div>
         </fieldset>
         {who === "teams" ? (
           <div className="space-y-3">
-            <p>Up to 10 teams. Each team can have up to 4 children.</p>
+            <p>{tr("Up to 10 teams. Each team can have up to 4 children.")}</p>
             {draft.map((team, index) => (
               <div key={team.id} className="rounded-2xl bg-sand p-3 ring-1 ring-ink/15">
                 <label className="text-sm font-extrabold" htmlFor={`team-${team.id}`}>
-                  Team name
+                  {tr("Team name")}
                 </label>
                 <input
                   id={`team-${team.id}`}
-                  value={team.name}
-                  maxLength={20}
+                  value={tr(team.name)}
+                  maxLength={40}
                   onChange={(event) =>
                     setDraft((list) => list.map((item) => (item.id === team.id ? { ...item, name: event.target.value } : item)))
                   }
                   className="mt-1 w-full rounded-xl border-2 border-ink/15 bg-sand px-3 py-3 text-ink"
                 />
                 <div className="mt-2 flex items-center justify-between gap-2">
-                  <span className="font-bold">Children</span>
+                  <span className="font-bold">{tr("Children")}</span>
                   <span className="flex items-center gap-2">
                     <button
                       type="button"
@@ -271,7 +279,7 @@ export function QuizGame() {
                           list.map((item) => (item.id === team.id ? { ...item, size: Math.max(1, item.size - 1) } : item)),
                         )
                       }
-                      aria-label={`Fewer children in ${team.name}`}
+                      aria-label={tr("Fewer children in {name}", { name: tr(team.name) })}
                     >
                       −
                     </button>
@@ -284,7 +292,7 @@ export function QuizGame() {
                           list.map((item) => (item.id === team.id ? { ...item, size: Math.min(4, item.size + 1) } : item)),
                         )
                       }
-                      aria-label={`More children in ${team.name}`}
+                      aria-label={tr("More children in {name}", { name: tr(team.name) })}
                     >
                       +
                     </button>
@@ -296,7 +304,9 @@ export function QuizGame() {
                     className="mt-2 min-h-11 text-sm font-extrabold text-sky underline"
                     onClick={() => setDraft((list) => list.filter((item) => item.id !== team.id))}
                   >
-                    Remove {team.name || `team ${index + 1}`}
+                    {tr("Remove {name}", {
+                      name: team.name.trim() ? tr(team.name) : tr("team {n}", { n: index + 1 }),
+                    })}
                   </button>
                 ) : null}
               </div>
@@ -312,14 +322,14 @@ export function QuizGame() {
                   ])
                 }
               >
-                Add a team
+                {tr("Add a team")}
               </button>
             ) : null}
           </div>
         ) : null}
-        <p>If teams tie, a playoff begins. After three tied playoff rounds, it is a draw.</p>
+        <p>{tr("If teams tie, a playoff begins. After three tied playoff rounds, it is a draw.")}</p>
         <button type="button" onClick={start} className="min-h-12 w-full rounded-xl bg-gold px-4 py-3 text-lg font-extrabold text-ink">
-          Start
+          {tr("Start")}
         </button>
       </section>
     );
@@ -331,17 +341,19 @@ export function QuizGame() {
       <section className="mt-5 space-y-4">
         {screen.main.who === "solo" ? (
           <p className="font-display text-3xl text-sky">
-            You answered {screen.main.soloScore} out of {total}.
+            {tr("You answered {score} out of {total}.", { score: screen.main.soloScore, total })}
           </p>
         ) : (
-          <p className="font-display text-3xl text-sky">{screen.note}</p>
+          <p className="font-display text-3xl text-sky">
+            {tr(screen.note.key, screen.note.name ? { name: tr(screen.note.name) } : undefined)}
+          </p>
         )}
         {screen.main.who === "teams" ? (
           <ul className="space-y-2">
             {screen.main.teams.map((team) => (
               <li key={team.id} className="flex items-center justify-between rounded-xl bg-sand px-3 py-3 ring-1 ring-ink/15">
                 <span className="min-w-0 truncate font-bold">
-                  {team.name} · {team.size}
+                  {tr(team.name)} · {team.size}
                 </span>
                 <span className="font-extrabold tabular-nums">{team.score}</span>
               </li>
@@ -350,25 +362,25 @@ export function QuizGame() {
         ) : null}
         {screen.main.misses.length > 0 ? (
           <div>
-            <h2 className="text-2xl text-sky">Facts to remember</h2>
+            <h2 className="text-2xl text-sky">{tr("Facts to remember")}</h2>
             <ul className="mt-2 space-y-2">
               {screen.main.misses.map((miss) => (
                 <li key={`${miss.prompt}-${miss.answer}`} className="rounded-xl bg-gold px-3 py-3 text-ink">
-                  <p className="font-bold">{miss.prompt}</p>
-                  <p>{miss.answer}</p>
+                  <p className="font-bold">{tr(miss.prompt)}</p>
+                  <p>{tr(miss.answer)}</p>
                 </li>
               ))}
             </ul>
           </div>
         ) : (
-          <p>Every answer matched.</p>
+          <p>{tr("Every answer matched.")}</p>
         )}
         <button
           type="button"
           className="min-h-12 w-full rounded-xl bg-sky px-4 py-3 font-extrabold text-sand"
           onClick={() => setScreen({ name: "setup" })}
         >
-          Play again
+          {tr("Play again")}
         </button>
       </section>
     );
@@ -390,7 +402,9 @@ export function QuizGame() {
   return (
     <section className="mt-5" aria-live="polite">
       <p className="text-sm font-extrabold text-olive tabular-nums">
-        {screen.name === "main" ? `Question ${indexLabel} of ${total}` : `Playoff · tied round ${screen.playoff.clean + 1}`}
+        {screen.name === "main"
+          ? tr("Question {n} of {total}", { n: indexLabel, total })
+          : tr("Playoff · tied round {n}", { n: screen.playoff.clean + 1 })}
       </p>
       <div className="mt-2 h-2 overflow-hidden rounded-full bg-ink/10">
         <div
@@ -400,23 +414,29 @@ export function QuizGame() {
           }}
         />
       </div>
-      {turn ? <p className="mt-3 rounded-xl bg-gold px-3 py-3 font-extrabold text-ink">Your turn: {turn.name}</p> : null}
+      {turn ? (
+        <p className="mt-3 rounded-xl bg-gold px-3 py-3 font-extrabold text-ink">
+          {tr("Your turn: {name}", { name: tr(turn.name) })}
+        </p>
+      ) : null}
       {screen.name === "playoff" && screen.playoff.phase === "ask" && playoffTeam ? (
         <p className="mt-3 rounded-xl bg-gold px-3 py-3 font-extrabold text-ink">
-          Tied teams. Your turn: {playoffTeam}. The answer waits until each tied team has chosen.
+          {tr("Tied teams. Your turn: {name}. The answer waits until each tied team has chosen.", {
+            name: tr(playoffTeam),
+          })}
         </p>
       ) : null}
       {screen.name === "main" && screen.main.who === "teams" ? (
         <ul className="mt-3 grid grid-cols-2 gap-2">
           {screen.main.teams.map((team) => (
             <li key={team.id} className="truncate rounded-lg bg-sand px-2 py-2 text-sm ring-1 ring-ink/15">
-              <span className="font-bold">{team.name}</span>
+              <span className="font-bold">{tr(team.name)}</span>
               <span className="float-right tabular-nums">{team.score}</span>
             </li>
           ))}
         </ul>
       ) : null}
-      <h2 className="mt-4 text-2xl text-sky">{card.prompt}</h2>
+      <h2 className="mt-4 text-2xl text-sky">{tr(card.prompt)}</h2>
       <div className="mt-3 flex flex-col gap-2">
         {card.choices.map((choice) => {
           const show = locked;
@@ -433,14 +453,16 @@ export function QuizGame() {
                 show && picked === choice && !isAnswer ? "ring-2 ring-ink" : "",
               )}
             >
-              {choice}
-              {show && picked === choice && !isAnswer ? <span className="mt-1 block text-sm font-extrabold">Your choice</span> : null}
+              {tr(choice)}
+              {show && picked === choice && !isAnswer ? (
+                <span className="mt-1 block text-sm font-extrabold">{tr("Your choice")}</span>
+              ) : null}
             </button>
           );
         })}
       </div>
-      {locked && screen.name === "main" ? <p className="mt-3 font-bold">{card.answer}</p> : null}
-      {locked && screen.name === "playoff" ? <p className="mt-3 font-bold">{card.answer}</p> : null}
+      {locked && screen.name === "main" ? <p className="mt-3 font-bold">{tr(card.answer)}</p> : null}
+      {locked && screen.name === "playoff" ? <p className="mt-3 font-bold">{tr(card.answer)}</p> : null}
     </section>
   );
 }

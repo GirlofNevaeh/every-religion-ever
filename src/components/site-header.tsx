@@ -1,4 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { LanguageButton } from "@/components/language-button";
+import { useTr } from "@/i18n/locale";
 import { cn } from "@/lib/cn";
 
 const NAV = [
@@ -16,14 +18,16 @@ const NAV = [
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const tr = useTr();
 
   return (
     <header className="no-print sticky top-0 z-40 border-b border-ink/10 bg-sand">
       <div className="mx-auto w-full max-w-5xl px-3 py-2">
-        <Link to="/" className="font-display block text-xl leading-none text-sky sm:text-2xl">
+        <LanguageButton />
+        <Link to="/" className="font-display mt-2 block text-xl leading-none text-sky sm:text-2xl">
           Every Religion Ever
         </Link>
-        <nav aria-label="Pages" className="mt-2 grid grid-cols-3 gap-1 sm:grid-cols-5 lg:grid-cols-10">
+        <nav aria-label={tr("Pages")} className="mt-2 grid grid-cols-3 gap-1 sm:grid-cols-5 lg:grid-cols-10">
           {NAV.map((item) => {
             const active = item.exact
               ? pathname === item.to
@@ -38,7 +42,7 @@ export function SiteHeader() {
                   active ? "bg-sky text-sand" : "bg-sand text-ink ring-1 ring-ink/15",
                 )}
               >
-                {item.label}
+                {tr(item.label)}
               </Link>
             );
           })}

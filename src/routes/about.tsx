@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PhotoCredit } from "@/components/photo-credit";
 import { PHOTO_CREDITS } from "@/data/photos";
+import { useTr } from "@/i18n/locale";
 
 export const Route = createFileRoute("/about")({
   head: () => ({ meta: [{ title: "About · Every Religion Ever" }] }),
@@ -43,10 +44,11 @@ const STEPS = [
 ];
 
 function AboutPage() {
+  const tr = useTr();
   return (
     <main id="content" className="mx-auto w-full max-w-3xl px-4 py-6">
-      <h1 className="text-4xl text-sky">Be a good guest</h1>
-      <p className="mt-2">In a place of worship, watch, ask, and be calm.</p>
+      <h1 className="text-4xl text-sky">{tr("Be a good guest")}</h1>
+      <p className="mt-2">{tr("In a place of worship, watch, ask, and be calm.")}</p>
       <ol className="mt-6 space-y-3">
         {STEPS.map((step, index) => (
           <li key={step.title} className="grid grid-cols-[3rem_1fr] gap-3 rounded-2xl bg-sand p-4 ring-1 ring-ink/15">
@@ -54,18 +56,18 @@ function AboutPage() {
               {index + 1}
             </span>
             <span className="min-w-0">
-              <h2 className="text-2xl text-sky">{step.title}</h2>
-              <p className="mt-1">{step.body}</p>
+              <h2 className="text-2xl text-sky">{tr(step.title)}</h2>
+              <p className="mt-1">{tr(step.body)}</p>
             </span>
           </li>
         ))}
       </ol>
       <section id="photos" className="mt-8 scroll-mt-28">
-        <h2 className="text-3xl text-sky">Photo credits</h2>
+        <h2 className="text-3xl text-sky">{tr("Photo credits")}</h2>
         <p className="mt-2">
-          Buildings and objects are real photos. Each photo names its maker and its licence. People are drawn, not
-          photographed. The drawings show God, Jesus, Moses, Krishna, the Buddha, Guru Nanak, and a family sharing food.
-          Muhammad is not drawn. Many Jews, Muslims, and Sikhs do not draw God.
+          {tr(
+            "Buildings and objects are real photos. Each photo names its maker and its licence. People are drawn, not photographed. The drawings show God, Jesus, Moses, Krishna, the Buddha, Guru Nanak, and a family sharing food. Muhammad is not drawn. Many Jews, Muslims, and Sikhs do not draw God.",
+          )}
         </p>
         <ul className="mt-4 space-y-3">
           {PHOTO_CREDITS.map((credit) => (

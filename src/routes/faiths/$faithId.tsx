@@ -3,6 +3,7 @@ import { BookStandIcon, KhandaIcon } from "@/components/symbols";
 import { PhotoCredit } from "@/components/photo-credit";
 import { faithById, type Faith } from "@/data/faiths";
 import { figureForFaith } from "@/data/figures";
+import { useTr } from "@/i18n/locale";
 
 export const Route = createFileRoute("/faiths/$faithId")({
   head: ({ params }) => {
@@ -14,15 +15,16 @@ export const Route = createFileRoute("/faiths/$faithId")({
 });
 
 function FaithRoute() {
+  const tr = useTr();
   const { faithId } = Route.useParams();
   if (faithId === "more") return <MoreFaiths />;
   const faith = faithById(faithId);
   if (!faith) {
     return (
       <main id="content" className="mx-auto w-full max-w-3xl px-4 py-8">
-        <h1 className="text-3xl text-sky">That page is not here</h1>
+        <h1 className="text-3xl text-sky">{tr("That page is not here")}</h1>
         <Link to="/faiths" search={{ q: "" }} className="mt-4 inline-flex min-h-11 items-center font-extrabold text-sky underline">
-          Back to faiths
+          {tr("Back to faiths")}
         </Link>
       </main>
     );
@@ -31,43 +33,44 @@ function FaithRoute() {
 }
 
 function FaithPage({ faith }: { faith: Faith }) {
+  const tr = useTr();
   const figure = figureForFaith(faith.id);
   const facts = [
-    { label: "What many people call it", body: faith.called },
-    { label: "A belief many people hold", body: faith.belief },
-    { label: faith.bookTitle, body: faith.book },
-    { label: faith.placeTitle, body: faith.place },
-    { label: faith.festivalTitle, body: faith.festival },
-    { label: "A kind act", body: faith.kind },
-    { label: "Food, dress, or another rule", body: faith.rule },
-    { label: "Pictures", body: faith.pictures },
+    { label: tr("What many people call it"), body: tr(faith.called) },
+    { label: tr("A belief many people hold"), body: tr(faith.belief) },
+    { label: tr(faith.bookTitle), body: tr(faith.book) },
+    { label: tr(faith.placeTitle), body: tr(faith.place) },
+    { label: tr(faith.festivalTitle), body: tr(faith.festival) },
+    { label: tr("A kind act"), body: tr(faith.kind) },
+    { label: tr("Food, dress, or another rule"), body: tr(faith.rule) },
+    { label: tr("Pictures"), body: tr(faith.pictures) },
   ];
 
   return (
     <main id="content" className="mx-auto w-full max-w-5xl px-4 py-6">
-      <p className="text-sm font-extrabold text-olive">{faith.people}</p>
-      <h1 className="mt-1 text-4xl text-sky">{faith.name}</h1>
+      <p className="text-sm font-extrabold text-olive">{tr(faith.people)}</p>
+      <h1 className="mt-1 text-4xl text-sky">{tr(faith.name)}</h1>
       <figure className="mt-4">
         <img
           src={faith.image}
-          alt={faith.imageAlt}
+          alt={tr(faith.imageAlt)}
           className="aspect-[4/3] w-full rounded-3xl object-cover"
         />
         <PhotoCredit credit={faith.credit} />
       </figure>
       <p className="mt-4">
         <Link to="/people" hash={figure.id} className="font-extrabold text-sky underline">
-          Profile: {figure.name}
+          {tr("Profile: {name}", { name: tr(figure.name) })}
         </Link>
       </p>
       <p className="mt-4 flex items-center gap-3 text-base">
         <BookStandIcon className="size-10 shrink-0 text-olive" />
-        <span>{faith.greeting}</span>
+        <span>{tr(faith.greeting)}</span>
       </p>
       {faith.id === "sikhism" ? (
         <p className="mt-3 flex items-center gap-3">
           <KhandaIcon className="size-12 shrink-0 text-ink" />
-          <span>The Khanda is a Sikh symbol.</span>
+          <span>{tr("The Khanda is a Sikh symbol.")}</span>
         </p>
       ) : null}
       <div className="mt-6 grid gap-3 md:grid-cols-2">
@@ -83,6 +86,7 @@ function FaithPage({ faith }: { faith: Faith }) {
 }
 
 function MoreFaiths() {
+  const tr = useTr();
   const blocks = [
     {
       title: "Bahá’í Faith",
@@ -115,15 +119,15 @@ function MoreFaiths() {
 
   return (
     <main id="content" className="mx-auto w-full max-w-5xl px-4 py-6">
-      <h1 className="text-4xl text-sky">More faiths and none</h1>
-      <p className="mt-2 max-w-2xl">Bahá’í, Jainism, and people who do not follow a religion.</p>
+      <h1 className="text-4xl text-sky">{tr("More faiths and none")}</h1>
+      <p className="mt-2 max-w-2xl">{tr("Bahá’í, Jainism, and people who do not follow a religion.")}</p>
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
         {blocks.map((block) => (
           <article key={block.title} className="rounded-3xl bg-sand p-4 ring-1 ring-ink/15">
-            <h2 className="text-2xl text-olive">{block.title}</h2>
+            <h2 className="text-2xl text-olive">{tr(block.title)}</h2>
             <div className="mt-3 space-y-3">
               {block.body.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}>{tr(paragraph)}</p>
               ))}
             </div>
           </article>

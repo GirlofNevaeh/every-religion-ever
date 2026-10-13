@@ -1,5 +1,6 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
+import { LocaleProvider, useTr } from "@/i18n/locale";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -33,27 +34,42 @@ export const Route = createRootRoute({
       },
     ],
   }),
-  component: () => (
+  component: RootComponent,
+});
+
+function RootComponent() {
+  return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
         <PreviewHostBridge />
-        <AuthProvider>
-          <a href="#content" className="skip-link">
-            Skip to content
-          </a>
-          <div className="flex min-h-screen flex-col">
-            <SiteHeader />
-            <div className="flex-1">
-              <Outlet />
-            </div>
-            <SiteFooter />
-          </div>
-        </AuthProvider>
+        <LocaleProvider>
+          <AuthProvider>
+            <AppShell />
+          </AuthProvider>
+        </LocaleProvider>
         <Scripts />
       </body>
     </html>
-  ),
-});
+  );
+}
+
+function AppShell() {
+  const tr = useTr();
+  return (
+    <>
+      <a href="#content" className="skip-link">
+        {tr("Skip to content")}
+      </a>
+      <div className="flex min-h-screen flex-col">
+        <SiteHeader />
+        <div className="flex-1">
+          <Outlet />
+        </div>
+        <SiteFooter />
+      </div>
+    </>
+  );
+}

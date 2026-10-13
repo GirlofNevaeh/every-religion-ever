@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { FaithId } from "@/data/faiths";
+import { useTr } from "@/i18n/locale";
 import { CrossIcon, DavidStar, DomeIcon, GurdwaraIcon, ShikharaIcon, StupaIcon } from "@/components/symbols";
 
 type Stop = {
@@ -20,10 +21,11 @@ const STOPS: Stop[] = [
 ];
 
 export function WorldMap() {
+  const tr = useTr();
   return (
     <div>
       <div className="relative rounded-3xl bg-sky">
-        <svg viewBox="0 0 800 460" className="block h-auto w-full" role="img" aria-label="A simple world diagram">
+        <svg viewBox="0 0 800 460" className="block h-auto w-full" role="img" aria-label={tr("A simple world diagram")}>
           <rect width="800" height="460" className="fill-sky" />
           <ellipse cx="140" cy="170" rx="46" ry="78" className="fill-olive" />
           <ellipse cx="190" cy="270" rx="36" ry="48" className="fill-olive" />
@@ -40,7 +42,7 @@ export function WorldMap() {
               key={stop.id}
               to="/faiths/$faithId"
               params={{ faithId: stop.id }}
-              aria-label={stop.label}
+              aria-label={tr(stop.label)}
               style={{ left: stop.left, top: stop.top }}
               className="absolute flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gold text-ink ring-2 ring-sand"
             >
@@ -57,7 +59,7 @@ export function WorldMap() {
               params={{ faithId: stop.id }}
               className="flex min-h-11 items-center justify-center rounded-xl bg-gold px-2 py-2 text-center text-sm font-extrabold text-ink"
             >
-              {stop.label}
+              {tr(stop.label)}
             </Link>
           </li>
         ))}
