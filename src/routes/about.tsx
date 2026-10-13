@@ -62,7 +62,7 @@ function AboutPage() {
           </li>
         ))}
       </ol>
-      <section id="photos" className="mt-8 scroll-mt-28">
+      <section id="photos" className="mt-8 scroll-mt-4">
         <h2 className="text-3xl text-sky">{tr("Photo credits")}</h2>
         <p className="mt-2">
           {tr(

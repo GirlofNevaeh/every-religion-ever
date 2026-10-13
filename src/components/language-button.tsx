@@ -42,7 +42,7 @@ export function LanguageButton() {
           id={listId}
           role="listbox"
           aria-label={tr("Language")}
-          className="absolute left-0 z-50 mt-1 w-56 overflow-hidden rounded-2xl bg-sand py-1 text-ink ring-1 ring-ink/15"
+          className="absolute left-0 z-50 mt-1 max-h-[70vh] w-64 overflow-y-auto rounded-2xl bg-sand py-1 text-ink ring-1 ring-ink/15"
         >
           {LOCALES.map((item) => (
             <li key={item.id}>

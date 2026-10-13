@@ -95,7 +95,7 @@ export function catalog(): CatalogHit[] {
     text: `${project.name} ${project.faith} ${project.when} ${project.who} ${project.note} ${project.own} ${project.team} holiday holy day project class work`,
   }));
   const years: CatalogHit[] = YEAR_PROJECTS.map((project) => ({
-    title: `${project.label} projects`,
+    title: project.ownTitle,
     kind: "Projects",
     href: `/projects#${project.id}`,
     text: `${project.label} ${project.ownTitle} ${project.own} ${project.teamTitle} ${project.team} ${project.care} individual team primary year project`,

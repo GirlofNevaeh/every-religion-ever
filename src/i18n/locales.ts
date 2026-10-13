@@ -1,5 +1,6 @@
 export const LOCALES = [
   { id: "en", name: "English", html: "en" },
+  { id: "de", name: "German", html: "de" },
   { id: "gd", name: "Scots Gaelic", html: "gd" },
   { id: "cy", name: "Welsh", html: "cy" },
   { id: "ga", name: "Irish", html: "ga" },

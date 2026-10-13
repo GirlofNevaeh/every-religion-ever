@@ -5,6 +5,7 @@ import { isLocale, localeById, type LocaleId } from "@/i18n/locales";
 const STORAGE_KEY = "ere-locale";
 
 const LOADERS: Record<Exclude<LocaleId, "en">, () => Promise<{ default: Record<string, string> }>> = {
+  de: () => import("@/i18n/dict/de.json"),
   gd: () => import("@/i18n/dict/gd.json"),
   cy: () => import("@/i18n/dict/cy.json"),
   ga: () => import("@/i18n/dict/ga.json"),

@@ -75,18 +75,19 @@ Use the row for your language. If a name is “keep”, use the English spelling
 | Jainism | Jainism | Jainiaeth | Jainis | jaïnisme | giainismo | jainismo | джайнизм |
 | Jains | Jains | Jainiaid | Jainaigh | jaïns | giainisti | jainistas | джайны |
 
-Keep these spellings when the English uses them: Masjid, Kaaba, halal, hijab, langar, seva, ahimsa, tzedakah, Namaste, Ik Onkar, Sat Sri Akal, Khalsa, kesh, kangha, kara, kachera, kirpan, Khanda, hanukkiah, stupa, vihara, Tripitaka, Sanatan Dharma, Bhagavad Gita, Vedas, Ramayana, Mahavira, Bandi Chhor Divas, As-salamu alaykum, Bahá’u’lláh, Siddhartha Gautama. In Russian, transliterate them simply (халяль, хиджаб, лангар, сева, ахимса, намасте, ступа, Махавира, Бахаулла, Сиддхартха Гаутама).
+Keep these spellings when the English uses them: Masjid, Kaaba, halal, hijab, langar, seva, ahimsa, tzedakah, Namaste, Ik Onkar, Sat Sri Akal, Khalsa, kesh, kangha, kara, kachera, kirpan, Khanda, hanukkiah, stupa, vihara, Tripitaka, Sanatan Dharma, Bhagavad Gita, Vedas, Ramayana, Mahavira, Bandi Chhor Divas, As-salamu alaykum, Bahá’u’lláh, Siddhartha Gautama. In Russian, transliterate them simply (халяль, хиджаб, лангар, сева, ахимса, намасте, ступа, Махавира, Бахаулла, Сиддхартха Гаутама). In German, keep those spellings too, and use Christentum, Christen, Jesus, Gott, Mose, die Bibel, Kirche, Sonntag, Weihnachten, Ostern, die Fastenzeit, Islam, Muslime, der Koran, Moschee, Mekka, Judentum, Juden, die Tora, Synagoge, Chanukka, koscher, Kippa, Hinduismus, Buddhismus, Buddhisten, der Buddha, Tempel, Sikhismus, Gurdwara, Jainismus, Jainas. Capitalise German nouns. Use du.
 
-Language-button names, written in the TARGET language:
+Primary 1 … Primary 7: keep “Primary” as the school-year word children already see, or use the natural school-year word (fr Primaire 1, es Primaria 1, it Primaria 1, de Klasse 1, ru 1-й класс начальной школы is too long — use «Начальный 1»). gd Bun-sgoil 1, cy Blwyddyn 1, ga Bunscoil 1. Use the same pattern for “Primary 1 projects”.
 
-- gd: English=Beurla, Scots Gaelic=Gàidhlig, Welsh=Cuimris, Irish=Gaeilge na hÈireann, French=Fraingis, Italian=Eadailtis, Spanish=Spàinntis, Russian=Ruisis
-- cy: English=Saesneg, Scots Gaelic=Gaeleg yr Alban, Welsh=Cymraeg, Irish=Gwyddeleg, French=Ffrangeg, Italian=Eidaleg, Spanish=Sbaeneg, Russian=Rwseg
-- ga: English=Béarla, Scots Gaelic=Gaeilge na hAlban, Welsh=Breatnais, Irish=Gaeilge, French=Fraincis, Italian=Iodáilis, Spanish=Spáinnis, Russian=Rúisis
-- fr: English=Anglais, Scots Gaelic=Gaélique écossais, Welsh=Gallois, Irish=Irlandais, French=Français, Italian=Italien, Spanish=Espagnol, Russian=Russe
-- it: English=Inglese, Scots Gaelic=Gaelico scozzese, Welsh=Gallese, Irish=Irlandese, French=Francese, Italian=Italiano, Spanish=Spagnolo, Russian=Russo
-- es: English=Inglés, Scots Gaelic=Gaélico escocés, Welsh=Galés, Irish=Irlandés, French=Francés, Italian=Italiano, Spanish=Español, Russian=Ruso
-- ru: English=Английский, Scots Gaelic=Шотландский гэльский, Welsh=Валлийский, Irish=Ирландский, French=Французский, Italian=Итальянский, Spanish=Испанский, Russian=Русский
+Team 1 … Team 10: gd Sgioba 1, cy Tîm 1, ga Foireann 1, fr Équipe 1, it Squadra 1, es Equipo 1, ru Команда 1, de Gruppe 1. Key “Team” is the same word without a number. Key “team {n}” is lowercase in English; translate the word and keep `{n}`.
 
-Primary 1 … Primary 7: keep “Primary” as the school-year word children already see, or use the natural school-year word (fr Primaire 1, es Primaria 1, it Primaria 1, ru 1-й класс начальной школы is too long — use «Начальный 1»). gd Bun-sgoil 1, cy Blwyddyn 1, ga Bunscoil 1. Use the same pattern for “Primary 1 projects”.
+Language-button names, written in the TARGET language. Include German:
 
-Team 1 … Team 10: gd Sgioba 1, cy Tîm 1, ga Foireann 1, fr Équipe 1, it Squadra 1, es Equipo 1, ru Команда 1. Key “Team” is the same word without a number. Key “team {n}” is lowercase in English; translate the word and keep `{n}`.
+- gd: English=Beurla, Scots Gaelic=Gàidhlig, Welsh=Cuimris, Irish=Gaeilge na hÈireann, French=Fraingis, Italian=Eadailtis, Spanish=Spàinntis, Russian=Ruisis, German=Gearmailtis
+- cy: English=Saesneg, Scots Gaelic=Gaeleg yr Alban, Welsh=Cymraeg, Irish=Gwyddeleg, French=Ffrangeg, Italian=Eidaleg, Spanish=Sbaeneg, Russian=Rwseg, German=Almaeneg
+- ga: English=Béarla, Scots Gaelic=Gaeilge na hAlban, Welsh=Breatnais, Irish=Gaeilge, French=Fraincis, Italian=Iodáilis, Spanish=Spáinnis, Russian=Rúisis, German=Gearmáinis
+- fr: English=Anglais, Scots Gaelic=Gaélique écossais, Welsh=Gallois, Irish=Irlandais, French=Français, Italian=Italien, Spanish=Espagnol, Russian=Russe, German=Allemand
+- it: English=Inglese, Scots Gaelic=Gaelico scozzese, Welsh=Gallese, Irish=Irlandese, French=Francese, Italian=Italiano, Spanish=Spagnolo, Russian=Russo, German=Tedesco
+- es: English=Inglés, Scots Gaelic=Gaélico escocés, Welsh=Galés, Irish=Irlandés, French=Francés, Italian=Italiano, Spanish=Español, Russian=Ruso, German=Alemán
+- ru: English=Английский, Scots Gaelic=Шотландский гэльский, Welsh=Валлийский, Irish=Ирландский, French=Французский, Italian=Итальянский, Spanish=Испанский, Russian=Русский, German=Немецкий
+- de: English=Englisch, Scots Gaelic=Schottisch-Gälisch, Welsh=Walisisch, Irish=Irisch, French=Französisch, Italian=Italienisch, Spanish=Spanisch, Russian=Russisch, German=Deutsch

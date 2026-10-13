@@ -1,3 +1,5 @@
+import { MORE_YEAR_PROJECTS } from "@/data/projects-more";
+
 export type YearProject = {
   id: string;
   label: string;
@@ -15,7 +17,7 @@ export type YearProject = {
 export const YEAR_PROJECTS: YearProject[] = [
   {
     id: "p1",
-    label: "Primary 1",
+    label: "Age 5-6",
     ownTitle: "A calm pattern",
     own: "Draw a pattern of stars, leaves, or lamps. Use calm colours.",
     ownSteps: ["Choose stars, leaves, or lamps.", "Draw the same shape again and again.", "Colour the pattern."],
@@ -33,7 +35,7 @@ export const YEAR_PROJECTS: YearProject[] = [
   },
   {
     id: "p2",
-    label: "Primary 2",
+    label: "Age 6-7",
     ownTitle: "A place from the outside",
     own: "Draw one place of worship from the outside. Draw the building, not a holy person.",
     ownSteps: [
@@ -54,7 +56,7 @@ export const YEAR_PROJECTS: YearProject[] = [
   },
   {
     id: "p3",
-    label: "Primary 3",
+    label: "Age 7-8",
     ownTitle: "One greeting",
     own: "Learn one greeting a family may use. Say it kindly. Do not say it as a joke.",
     ownSteps: [
@@ -75,7 +77,7 @@ export const YEAR_PROJECTS: YearProject[] = [
   },
   {
     id: "p4",
-    label: "Primary 4",
+    label: "Age 8-9",
     ownTitle: "One time in the year",
     own: "Choose one festival or rest day. Write when it comes, and one thing many families do. Some dates move.",
     ownSteps: [
@@ -97,7 +99,7 @@ export const YEAR_PROJECTS: YearProject[] = [
   },
   {
     id: "p5",
-    label: "Primary 5",
+    label: "Age 9-10",
     ownTitle: "Three sentences",
     own: "Write three sentences about one place of worship. Use the words “many people”.",
     ownSteps: [
@@ -119,7 +121,7 @@ export const YEAR_PROJECTS: YearProject[] = [
   },
   {
     id: "p6",
-    label: "Primary 6",
+    label: "Age 10-11",
     ownTitle: "Two festivals",
     own: "Choose two festivals. Write what many families do. Write what some families do not do.",
     ownSteps: [
@@ -141,7 +143,7 @@ export const YEAR_PROJECTS: YearProject[] = [
   },
   {
     id: "p7",
-    label: "Primary 7",
+    label: "Age 11-12",
     ownTitle: "A shared festival",
     own: "Write a short paragraph that shows Diwali is marked by many Hindus, many Sikhs, and many Jains.",
     ownSteps: [
@@ -161,6 +163,7 @@ export const YEAR_PROJECTS: YearProject[] = [
     ],
     care: "Leave room for families who do not follow a religion.",
   },
+  ...MORE_YEAR_PROJECTS,
 ];
 
 export const CALENDAR_SLOTS = [

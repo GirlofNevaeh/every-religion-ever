@@ -1,6 +1,8 @@
-import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Outlet, Scripts, redirect } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
+import { hasAccess } from "@/lib/access";
 import { LocaleProvider, useTr } from "@/i18n/locale";
+import { Paywall } from "@/components/paywall";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -9,6 +11,12 @@ import appCss from "../styles.css?url";
 const APP_NAME = "Every Religion Ever";
 
 export const Route = createRootRoute({
+  beforeLoad: async ({ location }) => {
+    const open = await hasAccess();
+    const path = location.pathname.replace(/\/+$/, "") || "/";
+    if (!open && path !== "/") throw redirect({ to: "/" });
+    return { open };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -58,6 +66,8 @@ function RootComponent() {
 
 function AppShell() {
   const tr = useTr();
+  const { open } = Route.useRouteContext();
+  if (!open) return <Paywall />;
   return (
     <>
       <a href="#content" className="skip-link">

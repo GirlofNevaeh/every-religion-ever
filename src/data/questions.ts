@@ -1,3 +1,5 @@
+import { MORE_QUESTIONS } from "@/data/questions-more";
+
 export type QuestionTag =
   | "christianity"
   | "islam"
@@ -26,7 +28,7 @@ export const QUESTIONS: Question[] = [
   { id: "q007", tag: "christianity", prompt: "What can Lent mean for some Christians?", answer: "A time to eat less or give something up", wrong: ["A metal hat", "A race"] },
   { id: "q008", tag: "christianity", prompt: "What plain symbol do many churches use?", answer: "A cross", wrong: ["A toy crown", "A football"] },
   { id: "q009", tag: "christianity", prompt: "Do all Christian families worship in the same way?", answer: "No. Practices differ.", wrong: ["Yes. Every family must match.", "Only babies choose the rules."] },
-  { id: "q010", tag: "christianity", prompt: "What can stand for Christianity when Jesus is not drawn?", answer: "A church, a cross, a Bible, or a candle", wrong: ["A cartoon of God", "A drawing of Mary"] },
+  { id: "q010", tag: "christianity", prompt: "What can stand for Christianity if the class does not draw Jesus?", answer: "A church, a cross, a Bible, or a candle", wrong: ["A cartoon of God", "A drawing of Mary"] },
   { id: "q011", tag: "christianity", prompt: "What is a cathedral?", answer: "A large church", wrong: ["A cooking pot", "A fast"] },
   { id: "q012", tag: "christianity", prompt: "People tell the Christmas story about a birth. Whose birth?", answer: "Jesus", wrong: ["A river", "A sports team"] },
   { id: "q013", tag: "christianity", prompt: "What should you do before you take a photo in a church?", answer: "Ask", wrong: ["Stand on the table", "Shout"] },
@@ -46,7 +48,7 @@ export const QUESTIONS: Question[] = [
   { id: "q027", tag: "islam", prompt: "What does halal describe?", answer: "A food rule many Muslims follow", wrong: ["A dance step", "A building tax"] },
   { id: "q028", tag: "islam", prompt: "Which food do many Muslims not eat?", answer: "Pork", wrong: ["Apples", "Rice"] },
   { id: "q029", tag: "islam", prompt: "What do people usually do with shoes at a mosque?", answer: "Take them off", wrong: ["Throw them", "Wear them on the prayer rug"] },
-  { id: "q030", tag: "islam", prompt: "How do many Muslims pray?", answer: "In a calm way", wrong: ["As a joke", "Only by shouting"] },
+  { id: "q030", tag: "islam", prompt: "How do many Muslims pray?", answer: "In a calm, careful way", wrong: ["As a joke", "Only by shouting"] },
   { id: "q031", tag: "islam", prompt: "What is a hijab for many Muslim women and girls?", answer: "A hair covering worn with care, not a costume", wrong: ["A toy", "A food"] },
   { id: "q032", tag: "islam", prompt: "Does every Muslim woman wear a hijab?", answer: "No. Practices differ.", wrong: ["Yes. There is only one way.", "Only babies wear it."] },
   { id: "q033", tag: "islam", prompt: "Do many Muslims draw the prophets?", answer: "No. Many Muslims do not draw prophets.", wrong: ["Yes. It is a game.", "Only as a joke."] },
@@ -88,7 +90,7 @@ export const QUESTIONS: Question[] = [
   { id: "q069", tag: "buddhism", prompt: "What is Vesak for many Buddhists?", answer: "A festival about the Buddha’s birth, awakening, and death", wrong: ["A boat race", "A hat day"] },
   { id: "q070", tag: "buddhism", prompt: "What is a stupa?", answer: "A Buddhist place people may visit", wrong: ["A cooking pot", "A shoe"] },
   { id: "q071", tag: "buddhism", prompt: "What kind act matters in Buddhism?", answer: "Compassion, and trying not to harm", wrong: ["Jokes about prayer", "Ignoring guests"] },
-  { id: "q072", tag: "buddhism", prompt: "Are monks’ robes a costume?", answer: "No. They are a sign of a careful life.", wrong: ["Yes. They are for plays.", "Robes are food."] },
+  { id: "q072", tag: "buddhism", prompt: "Is a monk's robe a costume?", answer: "No. It is a sign of a careful life.", wrong: ["Yes. It is for a play.", "A robe is food."] },
   { id: "q073", tag: "buddhism", prompt: "What is a temple for many Buddhists?", answer: "A place to meditate or worship", wrong: ["A car park only", "A joke"] },
   { id: "q074", tag: "buddhism", prompt: "Can Buddhist practice happen at home?", answer: "Yes. Some people practise at home.", wrong: ["No. Home is forbidden.", "Only pets practise."] },
   { id: "q075", tag: "buddhism", prompt: "Are all Buddhists vegetarian?", answer: "No. Many are. Some are not.", wrong: ["Yes. All must eat the same food.", "Meat is the only food."] },
@@ -96,7 +98,7 @@ export const QUESTIONS: Question[] = [
   { id: "q077", tag: "buddhism", prompt: "What do many people bring at Vesak?", answer: "Lamps, flowers, or a quiet gift", wrong: ["A loud mockery", "Nothing kind"] },
   { id: "q078", tag: "buddhism", prompt: "Does Vesak fall on the same date everywhere?", answer: "No. The date can differ.", wrong: ["Yes. It is always 1 January.", "Vesak is every morning."] },
   { id: "q079", tag: "buddhism", prompt: "Which sentence is fair?", answer: "Many Buddhists follow the Buddha’s teaching.", wrong: ["This faith is the winner.", "This faith is false."] },
-  { id: "q080", tag: "buddhism", prompt: "A path the Buddha taught includes what?", answer: "Kind speech and kind acts", wrong: ["Cruel words", "Laughing at a shrine"] },
+  { id: "q080", tag: "buddhism", prompt: "What is part of a path the Buddha taught?", answer: "Kind speech and kind acts", wrong: ["Cruel words", "Laughing at a shrine"] },
   { id: "q081", tag: "buddhism", prompt: "What is a vihara?", answer: "A word some people use for a Buddhist monastery or temple", wrong: ["A sandwich", "A score"] },
   { id: "q082", tag: "buddhism", prompt: "Should you photograph a shrine without asking?", answer: "No", wrong: ["Yes, even if someone says no", "Only if you climb on it"] },
   { id: "q083", tag: "sikhism", prompt: "What is a gurdwara?", answer: "A Sikh place of worship", wrong: ["A swimming race", "A type of bread"] },
@@ -108,7 +110,7 @@ export const QUESTIONS: Question[] = [
   { id: "q089", tag: "sikhism", prompt: "What is Vaisakhi for many Sikhs?", answer: "An April festival. People tell the story of the Khalsa.", wrong: ["A snow sport", "A food ban"] },
   { id: "q090", tag: "sikhism", prompt: "How many human Gurus were there before the holy book became the Guru?", answer: "Ten", wrong: ["Two", "One hundred"] },
   { id: "q091", tag: "sikhism", prompt: "What does Ik Onkar mean?", answer: "There is one God", wrong: ["There are many winners", "God is a picture to draw"] },
-  { id: "q092", tag: "sikhism", prompt: "Are the Five Ks a costume?", answer: "No. They are articles of faith.", wrong: ["Yes. They are for dress-up day.", "They are a menu."] },
+  { id: "q092", tag: "sikhism", prompt: "Are the Five Ks worn as a costume?", answer: "No. They are articles of faith.", wrong: ["Yes. They are for dress-up day.", "They are a menu."] },
   { id: "q093", tag: "sikhism", prompt: "What is kesh?", answer: "Uncut hair", wrong: ["A sweet", "A song"] },
   { id: "q094", tag: "sikhism", prompt: "What is a kara?", answer: "A steel bracelet", wrong: ["A cake", "A map"] },
   { id: "q095", tag: "sikhism", prompt: "What is a kangha?", answer: "A small wooden comb", wrong: ["A drum for jokes", "A shoe"] },
@@ -130,13 +132,14 @@ export const QUESTIONS: Question[] = [
   { id: "q111", tag: "guest", prompt: "What voice do you use in a place of worship?", answer: "A quiet voice", wrong: ["Your loudest shout", "A joke voice"] },
   { id: "q112", tag: "guest", prompt: "When do you take your shoes off?", answer: "When that is the custom", wrong: ["You throw them", "Never, even if you are asked"] },
   { id: "q113", tag: "guest", prompt: "What do you do before you take a photograph?", answer: "Ask", wrong: ["Climb up high and snap", "Take one after someone says no"] },
-  { id: "q114", tag: "guest", prompt: "If you cannot eat the food, what do you say?", answer: "No thank you. You do not call it strange.", wrong: ["That food is weird.", "I will laugh."] },
+  { id: "q114", tag: "guest", prompt: "If you cannot eat the food, what do you say?", answer: "No thank you. I will not call it strange.", wrong: ["That food is weird.", "I will laugh."] },
   { id: "q115", tag: "guest", prompt: "Should you act out another family’s prayer as a joke?", answer: "No", wrong: ["Yes, for laughs", "Only if friends giggle"] },
   { id: "q116", tag: "guest", prompt: "If someone offers you a head covering inside, what is polite?", answer: "Wear it while you are inside", wrong: ["Toss it", "Draw on it"] },
   { id: "q117", tag: "guest", prompt: "What do you do if you do not know where to sit?", answer: "Ask, and follow the host", wrong: ["Sit on a holy book", "Run through the room"] },
   { id: "q118", tag: "guest", prompt: "A holy book is in front of you. What do you do?", answer: "Leave it in its careful place unless a host shows you.", wrong: ["Put it on the floor.", "Use it as a fan for a joke."] },
   { id: "q119", tag: "guest", prompt: "You do not have to pray on a visit. What do you do instead?", answer: "Sit calmly", wrong: ["Copy the prayer as a joke", "Talk over the prayer"] },
   { id: "q120", tag: "guest", prompt: "What belongs in a kind class welcome?", answer: "Room for different faiths, and for no religion", wrong: ["A contest about who is right", "A joke about a festival"] },
+  ...MORE_QUESTIONS,
 ];
 
 export function mulberry32(seed: number) {

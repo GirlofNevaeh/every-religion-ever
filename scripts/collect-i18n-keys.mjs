@@ -26,10 +26,12 @@ function stringsIn(file, skipNames = new Set()) {
 }
 
 stringsIn("src/data/questions.ts", new Set(["id", "tag"]));
+stringsIn("src/data/questions-more.ts", new Set(["id", "tag"]));
 stringsIn("src/data/faiths.ts", new Set(["id", "keywords"]));
 stringsIn("src/data/figures.ts", new Set(["id", "faithId"]));
 stringsIn("src/data/year.ts", new Set(["id", "faith", "day"]));
 stringsIn("src/data/projects.ts", new Set(["id"]));
+stringsIn("src/data/projects-more.ts", new Set(["id"]));
 stringsIn("src/data/photos.ts", new Set(["id", "title", "author", "authorUrl", "license", "licenseUrl", "sourceUrl"]));
 stringsIn("src/data/catalog.ts", new Set(["href", "text"]));
 stringsIn("src/i18n/locales.ts", new Set(["id", "html"]));
@@ -81,6 +83,7 @@ const dropExact = new Set([
   "fr",
   "it",
   "es",
+  "de",
   "ru",
   "setup",
   "main",

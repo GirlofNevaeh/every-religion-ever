@@ -21,7 +21,7 @@ export function SiteHeader() {
   const tr = useTr();
 
   return (
-    <header className="no-print sticky top-0 z-40 border-b border-ink/10 bg-sand">
+    <header className="no-print border-b border-ink/10 bg-sand">
       <div className="mx-auto w-full max-w-5xl px-3 py-2">
         <LanguageButton />
         <Link to="/" className="font-display mt-2 block text-xl leading-none text-sky sm:text-2xl">

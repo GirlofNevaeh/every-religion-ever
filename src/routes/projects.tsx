@@ -45,13 +45,20 @@ function ProjectsPage() {
     window.print();
   }
 
+  const ages = YEAR_PROJECTS.reduce<string[]>((list, project) => {
+    if (!list.includes(project.label)) list.push(project.label);
+    return list;
+  }, []);
+  const current = YEAR_PROJECTS.find((project) => project.id === open) ?? YEAR_PROJECTS[0];
+  const inAge = YEAR_PROJECTS.filter((project) => project.label === current.label);
+
   return (
     <main id="content" className="mx-auto w-full max-w-5xl px-4 py-6">
       <div className="no-print flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-4xl text-sky">{tr("Projects")}</h1>
           <p className="mt-2 max-w-2xl">
-            {tr("Primary 1 to Primary 7. One task on your own. One task with a team.")}
+            {tr("Age 5-6 to Age 11-12. Six projects for each age. One task on your own. One task with a team.")}
           </p>
         </div>
         <button
@@ -63,18 +70,37 @@ function ProjectsPage() {
         </button>
       </div>
       <div className="no-print mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        {YEAR_PROJECTS.map((project) => (
+        {ages.map((label) => (
+          <button
+            key={label}
+            type="button"
+            aria-pressed={current.label === label}
+            onClick={() => {
+              const first = YEAR_PROJECTS.find((project) => project.label === label);
+              if (first) choose(first.id);
+            }}
+            className={cn(
+              "min-h-11 rounded-xl px-2 py-2 text-sm font-extrabold",
+              current.label === label ? "bg-sky text-sand" : "bg-sand text-ink ring-1 ring-ink/15",
+            )}
+          >
+            {tr(label)}
+          </button>
+        ))}
+      </div>
+      <div className="no-print mt-2 grid gap-2 sm:grid-cols-2">
+        {inAge.map((project) => (
           <button
             key={project.id}
             type="button"
             aria-pressed={open === project.id}
             onClick={() => choose(project.id)}
             className={cn(
-              "min-h-11 rounded-xl px-2 py-2 text-sm font-extrabold",
-              open === project.id ? "bg-sky text-sand" : "bg-sand text-ink ring-1 ring-ink/15",
+              "min-h-11 rounded-xl px-3 py-2 text-left text-sm font-extrabold",
+              open === project.id ? "bg-olive text-sand" : "bg-sand text-ink ring-1 ring-ink/15",
             )}
           >
-            {tr(project.label)}
+            {tr(project.ownTitle)}
           </button>
         ))}
       </div>
@@ -89,7 +115,8 @@ function ProjectsPage() {
           )}
         >
           <p className="text-sm font-extrabold text-olive">Every Religion Ever</p>
-          <h2 className="mt-1 text-3xl text-sky">{tr(project.label)}</h2>
+          <p className="mt-1 text-sm font-extrabold text-olive">{tr(project.label)}</p>
+          <h2 className="mt-1 text-3xl text-sky">{tr(project.ownTitle)}</h2>
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             <p>
               {tr("Name")} <span className="inline-block min-w-40 border-b border-ink/40">{"\u00a0"}</span>
