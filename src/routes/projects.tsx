@@ -58,7 +58,7 @@ function ProjectsPage() {
         <div>
           <h1 className="text-4xl text-sky">{tr("Projects")}</h1>
           <p className="mt-2 max-w-2xl">
-            {tr("Age 5-6 to Age 11-12. Six projects for each age. One task on your own. One task with a team.")}
+            {tr("Age 5-12. Six projects for each age. One task on your own. One task with a team.")}
           </p>
         </div>
         <button
