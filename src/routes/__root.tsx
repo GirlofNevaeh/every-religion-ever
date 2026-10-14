@@ -1,6 +1,8 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
+import { hasAccess } from "@/lib/access";
 import { LocaleProvider, useTr } from "@/i18n/locale";
+import { Paywall } from "@/components/paywall";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -9,6 +11,11 @@ import appCss from "../styles.css?url";
 const APP_NAME = "Every Religion Ever";
 
 export const Route = createRootRoute({
+  beforeLoad: async ({ location }) => {
+    const open = await hasAccess();
+    const path = location.pathname.replace(/\/+$/, "") || "/";
+    return { locked: !open && path !== "/" };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -58,6 +65,7 @@ function RootComponent() {
 
 function AppShell() {
   const tr = useTr();
+  const { locked } = Route.useRouteContext();
   return (
     <>
       <a href="#content" className="skip-link">
@@ -65,9 +73,7 @@ function AppShell() {
       </a>
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
-        <div className="flex-1">
-          <Outlet />
-        </div>
+        <div className="flex-1">{locked ? <Paywall /> : <Outlet />}</div>
         <SiteFooter />
       </div>
     </>

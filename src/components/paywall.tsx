@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "@tanstack/react-router";
-import { LanguageButton } from "@/components/language-button";
 import { unlockWithKey } from "@/lib/access";
 import { useTr } from "@/i18n/locale";
 
@@ -33,10 +32,7 @@ export function Paywall() {
 
   return (
     <main id="content" className="mx-auto w-full max-w-3xl px-4 py-6">
-      <div className="flex justify-end">
-        <LanguageButton />
-      </div>
-      <h1 className="mt-4 text-4xl text-sky sm:text-5xl">Every Religion Ever</h1>
+      <h1 className="text-4xl text-sky sm:text-5xl">Every Religion Ever</h1>
       <p className="mt-3 max-w-2xl text-lg">
         {tr(
           "A calm site for children about Christianity, Islam, Judaism, Hinduism, Buddhism, Sikhism, other faiths, and no religion.",
