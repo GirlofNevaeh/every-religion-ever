@@ -39,7 +39,7 @@ export const QUESTIONS: Question[] = [
   { id: "q018", tag: "islam", prompt: "What is another word many people use for a mosque?", answer: "Masjid", wrong: ["Kippah", "Stupa"] },
   { id: "q019", tag: "islam", prompt: "Which book is sacred for Muslims?", answer: "The Qur'an", wrong: ["A bus ticket", "A recipe card"] },
   { id: "q020", tag: "islam", prompt: "Who do Muslims worship?", answer: "One God. Allah means God.", wrong: ["A different god for each day", "No one, and prayer is a joke"] },
-  { id: "q021", tag: "islam", prompt: "Which way do Muslims face to pray?", answer: "Toward Mecca", wrong: ["Toward the nearest shop", "Any way, with no care"] },
+  { id: "q021", tag: "islam", prompt: "Which way do Muslims face to pray?", answer: "Towards Mecca", wrong: ["Towards the nearest shop", "Any way, with no care"] },
   { id: "q022", tag: "islam", prompt: "What is the Kaaba?", answer: "The cube-shaped building in Mecca that Muslims face in prayer", wrong: ["A sweet bread", "A school bell"] },
   { id: "q023", tag: "islam", prompt: "What do many Muslim families do in Ramadan?", answer: "They fast from dawn to sunset.", wrong: ["They stay awake all year.", "They stop being kind."] },
   { id: "q024", tag: "islam", prompt: "Who often does not fast in Ramadan?", answer: "Young children, and people who are ill", wrong: ["Every baby must fast", "Only visitors"] },

@@ -100,16 +100,16 @@ function MoreFaiths() {
     {
       title: "Jainism",
       body: [
-        "Many people call this faith Jainism. A central teaching is ahimsa. That means non-violence toward living beings.",
+        "Many people call this faith Jainism. A central teaching is ahimsa. That means non-violence towards living beings.",
         "Many Jains follow the path taught by Mahavira and other teachers called Tirthankaras.",
         "A place of worship may be called a derasar or a temple. Many Jains are vegetarian. Some also avoid honey or root vegetables. Some do not. Practices differ.",
-        "Many Jains mark Diwali. People tell the story of Mahavira at that time. A kind act is to walk carefully, and to speak in a way that does not hurt.",
+        "Many Jains mark Diwali. People tell the story of Mahavira at that time. A kind act is to walk carefully, and to speak in a way that does not hurt people.",
       ],
     },
     {
       title: "No religion",
       body: [
-        "Some people do not follow a religion. Some say they are atheist, which means they do not believe in a god. Some say they are agnostic, which means they do not claim to know. Some say humanist, which means they care about human kindness and fairness. Some simply say none.",
+        "Some people do not follow a religion. Some say they are atheist, which means they do not believe in a god. Some say they are agnostic, which means they do not claim to know. Some say they are humanist, which means they care about human kindness and fairness. Some simply say they have none.",
         "These families are a real part of the world. They may still have rest days, birthdays, and meals together. Some mark a public holiday. Some do not.",
         "There is no one sacred book and no one place of worship. Some people love a library, a park, or home. There is no shared food rule. Never call their food strange.",
         "They can be kind. They are not a mistake. A class includes them with the same respect.",

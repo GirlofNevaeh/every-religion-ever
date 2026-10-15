@@ -61,7 +61,7 @@ export function Paywall() {
         >
           {tr("Get an access key")}
         </a>
-        <p className="mt-2 text-sm">{PRICING_URL}</p>
+        <p className="mt-2 break-all text-sm">{PRICING_URL}</p>
 
         <form onSubmit={onSubmit} className="mt-5 grid gap-2">
           <label htmlFor="access-key" className="text-sm font-extrabold">

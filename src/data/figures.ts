@@ -60,7 +60,7 @@ export const FIGURES: Figure[] = [
     drawn: false,
     credit: photoCredit("lamp"),
     paragraphs: [
-      "Many Muslims follow the teachings of Muhammad. They believe God gave him the Quran.",
+      "Many Muslims follow the teachings of Muhammad. They believe God gave him the Qur'an.",
       "Muslims often say “peace be upon him” after his name.",
       "Many Muslims do not make a picture of Muhammad, or of any prophet, or of God. This card shows a mosque lamp. It is an object, not a person.",
     ],
