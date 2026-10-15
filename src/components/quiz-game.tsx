@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { drawFresh, mulberry32, pickQuestions, type PlayCard } from "@/data/questions";
+import { playCheer, playFart, primeQuizAudio } from "@/lib/quiz-sounds";
 import { useTr } from "@/i18n/locale";
 import { cn } from "@/lib/cn";
 
@@ -56,6 +57,10 @@ export function QuizGame() {
   const [screen, setScreen] = useState<Screen>({ name: "setup" });
   const rngRef = useRef<(() => number) | null>(null);
   const usedRef = useRef<Set<string>>(new Set());
+
+  useEffect(() => {
+    primeQuizAudio();
+  }, []);
 
   useEffect(() => {
     if (screen.name === "main" && screen.main.phase === "feedback") {
@@ -188,6 +193,11 @@ export function QuizGame() {
   }
 
   function chooseMain(choice: string) {
+    if (screen.name !== "main" || screen.main.phase !== "ask") return;
+    const card = screen.main.cards[screen.main.index];
+    if (!card) return;
+    if (choice === card.answer) playCheer();
+    else playFart();
     setScreen((current) => {
       if (current.name !== "main" || current.main.phase !== "ask") return current;
       const card = current.main.cards[current.main.index];
@@ -215,6 +225,17 @@ export function QuizGame() {
   }
 
   function choosePlayoff(choice: string) {
+    if (screen.name !== "playoff" || screen.playoff.phase !== "ask") return;
+    const id = screen.playoff.ids[screen.playoff.cursor];
+    if (!id) return;
+    const answers = { ...screen.playoff.answers, [id]: choice };
+    const last = screen.playoff.cursor + 1 >= screen.playoff.ids.length;
+    if (last) {
+      screen.playoff.ids.forEach((teamId, index) => {
+        const right = answers[teamId] === screen.playoff.card.answer;
+        window.setTimeout(() => (right ? playCheer() : playFart()), index * 750);
+      });
+    }
     setScreen((current) => {
       if (current.name !== "playoff" || current.playoff.phase !== "ask") return current;
       const id = current.playoff.ids[current.playoff.cursor];
