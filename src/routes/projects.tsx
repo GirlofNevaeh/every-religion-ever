@@ -172,11 +172,9 @@ function ProjectsPage() {
         </article>
       ))}
       <p className="no-print mt-6 text-sm">
-        {tr("Holy day pages are on")}{" "}
         <Link to="/work" className="font-extrabold text-sky underline">
-          {tr("Work")}
+          {tr("Holy day pages are on the Work page.")}
         </Link>
-        .
       </p>
     </main>
   );

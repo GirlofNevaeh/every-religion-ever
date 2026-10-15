@@ -408,9 +408,9 @@ export function QuizGame() {
       </p>
       <div className="mt-2 h-2 overflow-hidden rounded-full bg-ink/10">
         <div
-          className="h-full origin-left bg-olive"
+          className="h-full w-full origin-left bg-olive"
           style={{
-            transform: `scaleX(${screen.name === "main" ? (screen.main.index + (locked ? 1 : 0)) / total : 1})`,
+            transform: `scaleX(${screen.name === "main" ? (screen.main.index + 1) / total : 1})`,
           }}
         />
       </div>

@@ -19,11 +19,10 @@ function WorkPage() {
         <div>
           <h1 className="text-4xl text-sky">{tr("Work")}</h1>
           <p className="mt-2 max-w-2xl">
-            {tr("Holy day pages, a festival calendar, and a places match. Year projects are on")}{" "}
+            {tr("Holy day pages, a festival calendar, and a matching game for places.")}{" "}
             <Link to="/projects" className="font-extrabold text-sky underline">
-              {tr("Projects")}
+              {tr("Year projects are on the Projects page.")}
             </Link>
-            .
           </p>
         </div>
         <button
