@@ -4,6 +4,7 @@ import { unlockWithKey } from "@/lib/access";
 import { useTr } from "@/i18n/locale";
 
 const PARTS = ["Faiths", "People", "Places", "Practice", "Time", "Quiz", "Projects", "Work"] as const;
+const PRICING_URL = "https://www.everyschoolever.com/pricing?plan=";
 
 export function Paywall() {
   const tr = useTr();
@@ -52,15 +53,15 @@ export function Paywall() {
       <section className="mt-6 rounded-2xl bg-sand p-4 ring-1 ring-ink/15 sm:p-5">
         <h2 className="text-2xl text-sky">{tr("This site opens with an access key.")}</h2>
         <p className="mt-2 max-w-2xl">
-          {tr("Buy a key at Every School Ever. Then come back to this page and enter the key.")}
+          {tr("Get an access key from Every School Ever. Then come back to this page and enter the key.")}
         </p>
         <a
-          href="https://everyschoolever.com"
+          href={PRICING_URL}
           className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-sky px-4 py-2 text-sm font-extrabold text-sand"
         >
-          {tr("Go to Every School Ever")}
+          {tr("Get an access key")}
         </a>
-        <p className="mt-2 text-sm">https://everyschoolever.com</p>
+        <p className="mt-2 text-sm">{PRICING_URL}</p>
 
         <form onSubmit={onSubmit} className="mt-5 grid gap-2">
           <label htmlFor="access-key" className="text-sm font-extrabold">
@@ -85,7 +86,7 @@ export function Paywall() {
           </button>
           {error ? (
             <p role="alert" className="text-sm font-bold">
-              {tr("That key does not open the site. Check it, or buy a key at Every School Ever.")}
+              {tr("That key does not open the site. Check it, or get a key from Every School Ever.")}
             </p>
           ) : null}
         </form>
