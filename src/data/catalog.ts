@@ -104,7 +104,7 @@ export function catalog(): CatalogHit[] {
     title: figure.name,
     kind: "People",
     href: `/people#${figure.id}`,
-    text: `${figure.name} ${figure.faithName} ${figure.paragraphs.join(" ")} profile teacher`,
+    text: `${figure.name} ${figure.faithName} ${figure.paragraphs.join(" ")} ${figure.facts.join(" ")} profile teacher`,
   }));
   return [...faiths, ...figures, ...steps, ...projects, ...years, ...EXTRA];
 }

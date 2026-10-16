@@ -31,6 +31,7 @@ const BANDS = [
       "Ramadan and Eid are Muslim festivals. In Ramadan, many Muslims fast from dawn to sunset. Young children often do not fast. Eid is a joyful day of prayer, food, and giving. The dates move.",
       "Shabbat and Hanukkah are Jewish festivals. Shabbat is every week, from Friday evening to Saturday evening. Many Jews rest. Hanukkah is a festival of lights for eight nights.",
       "Diwali is a festival many Hindus, Sikhs, and Jains mark. It is not only one religion’s day. Many families light lamps. People tell different stories.",
+      "At Janmashtami, many Hindus tell stories of Krishna's birth.",
       "Vesak is a festival for many Buddhists. People tell the story of the Buddha’s birth, awakening, and death. The date can differ.",
       "Vaisakhi is a festival for many Sikhs. It comes in April. People tell the story of the Khalsa.",
       "Some families with no religion still share a public holiday. Some do not. Practices differ from family to family.",
@@ -55,6 +56,7 @@ const BANDS = [
     paragraphs: [
       "Many faiths ask people to be kind. The words differ. The care can look alike.",
       "Many Christians try to love their neighbour. Many Muslims try to be honest and to give help. Many Jews give tzedakah. Many Hindus and many Jains try not to harm. Many Buddhists practise compassion. Many Sikhs offer seva, which is service, and share langar.",
+      "Stories people tell about Jesus, Moses, Krishna, the Buddha, and Guru Nanak all include care for other people. Muhammad taught that care too. He is not drawn.",
       "Many Bahá’ís work for peace. Many people with no religion still try to be fair.",
       "A kind class leaves room for all of these, and for families who do not follow a religion.",
     ],

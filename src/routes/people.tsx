@@ -74,6 +74,9 @@ function PeoplePage() {
             {figure.paragraphs.map((paragraph) => (
               <p key={paragraph}>{tr(paragraph)}</p>
             ))}
+            {figure.facts.map((fact) => (
+              <p key={fact}>{tr(fact)}</p>
+            ))}
           </div>
           {figure.drawn ? (
             <p className="mt-3 text-xs leading-snug">{tr("A drawing for this page. Not a photograph.")}</p>
@@ -91,6 +94,9 @@ function PeoplePage() {
         {tr(
           "Many Jews, Christians, and Muslims also tell stories of Abraham. He is not drawn here. Many Bahá’í families do not show a picture of Bahá’u’lláh.",
         )}
+      </p>
+      <p className="mt-2 max-w-2xl text-sm">
+        {tr("Stories say Abraham trusted one God. Jews, Christians, and Muslims all tell his story. Muslims often say Ibrahim.")}
       </p>
     </main>
   );

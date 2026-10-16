@@ -73,6 +73,14 @@ function FaithPage({ faith }: { faith: Faith }) {
           <span>{tr("The Khanda is a Sikh symbol.")}</span>
         </p>
       ) : null}
+      <section className="mt-6 rounded-3xl bg-sand p-4 ring-1 ring-ink/15">
+        <h2 className="text-2xl text-sky">{tr("Stories people tell")}</h2>
+        <div className="mt-3 space-y-3">
+          {figure.facts.map((fact) => (
+            <p key={fact}>{tr(fact)}</p>
+          ))}
+        </div>
+      </section>
       <div className="mt-6 grid gap-3 md:grid-cols-2">
         {facts.map((fact) => (
           <section key={fact.label} className="rounded-2xl bg-sand p-4 ring-1 ring-ink/15">
@@ -93,6 +101,7 @@ function MoreFaiths() {
       body: [
         "Many people call this faith the Bahá’í Faith. Bahá’ís worship one God. They follow the teachings of Bahá’u’lláh.",
         "He taught that all people belong to one human family. Sacred writings guide prayer and daily life. Many Bahá’í families do not use pictures of Bahá’u’lláh.",
+        "Bahá’u’lláh was born in Persia, now called Iran. He wrote many texts about peace, justice, and one human family.",
         "Many Bahá’ís meet in homes. A Bahá’í House of Worship is open to everyone. Many have nine sides and a quiet garden.",
         "Many adults fast for nineteen days in the year. Children are not asked to fast. A kind act is to tell the truth and to work for peace. Practices differ from family to family.",
       ],
@@ -102,6 +111,7 @@ function MoreFaiths() {
       body: [
         "Many people call this faith Jainism. A central teaching is ahimsa. That means non-violence towards living beings.",
         "Many Jains follow the path taught by Mahavira and other teachers called Tirthankaras.",
+        "Stories say Mahavira lived in India. He left a rich home and taught people not to harm living beings.",
         "A place of worship may be called a derasar or a temple. Many Jains are vegetarian. Some also avoid honey or root vegetables. Some do not. Practices differ.",
         "Many Jains mark Diwali. People tell the story of Mahavira at that time. A kind act is to walk carefully, and to speak in a way that does not hurt people.",
       ],
