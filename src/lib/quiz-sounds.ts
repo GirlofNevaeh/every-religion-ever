@@ -1,143 +1,141 @@
 let audio: AudioContext | null = null;
-let primed = false;
+let keepalive: OscillatorNode | null = null;
+let keepaliveTimer: number | null = null;
 
-function audioContext(): AudioContext | null {
-  const Ctor =
-    window.AudioContext ??
-    (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-  if (!Ctor) return null;
-  if (!audio) audio = new Ctor();
+function context() {
+  const Ctx = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!Ctx) return null;
+  if (!audio) audio = new Ctx();
+  if (audio.state === "suspended") void audio.resume();
   return audio;
 }
 
-export function primeQuizAudio() {
-  if (primed || typeof window === "undefined") return;
-  primed = true;
-  const unlock = () => {
-    try {
-      const ctx = audioContext();
-      if (ctx?.state === "suspended") void ctx.resume();
-    } catch {
-      /* A blocked sound should never stop the quiz. */
-    }
-  };
-  window.addEventListener("pointerdown", unlock, { capture: true });
-  window.addEventListener("keydown", unlock, { capture: true });
+function tone(ctx: AudioContext, frequency: number, start: number, duration: number, volume: number, type: OscillatorType = "triangle") {
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(frequency, start);
+  gain.gain.setValueAtTime(0.0001, start);
+  gain.gain.exponentialRampToValueAtTime(volume, start + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(start);
+  osc.stop(start + duration + 0.02);
 }
 
-function ready(): AudioContext | null {
+function withSound(run: (ctx: AudioContext, now: number) => void) {
+  const ctx = context();
+  if (!ctx) return;
+  if (ctx.state === "suspended") void ctx.resume();
   try {
-    const ctx = audioContext();
-    if (!ctx) return null;
-    if (ctx.state === "suspended") void ctx.resume();
-    return ctx;
+    run(ctx, ctx.currentTime + 0.03);
   } catch {
-    return null;
+    // A failed ramp should not stop the next sound.
   }
+}
+
+export function warmAudio() {
+  const ctx = context();
+  if (ctx && ctx.state !== "running") void ctx.resume();
+}
+
+export function holdAudio(ms: number) {
+  const ctx = context();
+  if (!ctx) return;
+  if (!keepalive) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.value = 1;
+    gain.gain.value = 0.0001;
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    keepalive = osc;
+  }
+  if (keepaliveTimer) window.clearTimeout(keepaliveTimer);
+  keepaliveTimer = window.setTimeout(() => {
+    keepalive?.stop();
+    keepalive = null;
+    keepaliveTimer = null;
+  }, ms);
 }
 
 export function playCheer() {
-  try {
-    const ctx = ready();
-    if (!ctx) return;
-    const t0 = ctx.currentTime;
-    const burst = 0.22;
-    const count = Math.floor(ctx.sampleRate * burst);
-    const buffer = ctx.createBuffer(1, count, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < count; i += 1) data[i] = Math.random() * 2 - 1;
-    const noise = ctx.createBufferSource();
-    noise.buffer = buffer;
-    const highpass = ctx.createBiquadFilter();
-    highpass.type = "highpass";
-    highpass.frequency.value = 1200;
-    const noiseGain = ctx.createGain();
-    noiseGain.gain.setValueAtTime(0.12, t0);
-    noiseGain.gain.exponentialRampToValueAtTime(0.001, t0 + burst);
-    noise.connect(highpass);
-    highpass.connect(noiseGain);
-    noiseGain.connect(ctx.destination);
-    noise.start(t0);
-    noise.stop(t0 + burst);
-
-    for (const [index, frequency] of [523.25, 659.25, 783.99, 1046.5].entries()) {
-      const start = t0 + index * 0.09;
-      const end = start + 0.32;
-      const tone = ctx.createOscillator();
-      tone.type = "triangle";
-      tone.frequency.value = frequency;
-      const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0.0001, start);
-      gain.gain.linearRampToValueAtTime(0.28, start + 0.015);
-      gain.gain.setValueAtTime(0.28, end - 0.03);
-      gain.gain.exponentialRampToValueAtTime(0.0001, end);
-      tone.connect(gain);
-      gain.connect(ctx.destination);
-      tone.start(start);
-      tone.stop(end);
-    }
-  } catch {
-    /* Keep the question moving if the browser blocks audio. */
-  }
+  withSound((ctx, now) => {
+    [523.25, 659.25, 783.99, 1046.5].forEach((frequency, index) => {
+      tone(ctx, frequency, now + index * 0.09, 0.32, 0.28);
+    });
+    const noise = ctx.createBuffer(1, ctx.sampleRate * 0.25, ctx.sampleRate);
+    const data = noise.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+    const source = ctx.createBufferSource();
+    const filter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+    source.buffer = noise;
+    filter.type = "highpass";
+    filter.frequency.value = 1200;
+    gain.gain.setValueAtTime(0.12, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    source.start(now);
+    source.stop(now + 0.25);
+  });
 }
 
 export function playFart() {
-  try {
-    const ctx = ready();
-    if (!ctx) return;
-    const t0 = ctx.currentTime;
+  withSound((ctx, now) => {
     const duration = 0.7;
-    const count = Math.floor(ctx.sampleRate * duration);
-    const buffer = ctx.createBuffer(1, count, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
+    const length = Math.floor(ctx.sampleRate * duration);
+    const noise = ctx.createBuffer(1, length, ctx.sampleRate);
+    const data = noise.getChannelData(0);
     let brown = 0;
     let phase = 0;
-    let peak = 0.0001;
-    for (let i = 0; i < count; i += 1) {
+    for (let i = 0; i < data.length; i++) {
+      const t = i / ctx.sampleRate;
+      phase += ((46 - t * 24) / ctx.sampleRate) * Math.PI * 2;
+      const lip = Math.sin(phase);
+      const gate = lip > 0.05 ? 1 : 0.12;
       const white = Math.random() * 2 - 1;
       brown = brown * 0.8 + white * 0.2;
-      const mixed = brown * 0.85 + white * 0.15;
-      const buzz = 46 + (22 - 46) * (i / count);
-      phase += (Math.PI * 2 * buzz) / ctx.sampleRate;
-      data[i] = mixed * Math.abs(Math.sin(phase));
-      peak = Math.max(peak, Math.abs(data[i]));
+      data[i] = (brown * 1.4 + white * 0.45) * gate;
     }
-    for (let i = 0; i < count; i += 1) data[i] /= peak;
 
-    const noise = ctx.createBufferSource();
-    noise.buffer = buffer;
-    const band = ctx.createBiquadFilter();
-    band.type = "bandpass";
-    band.Q.value = 0.7;
-    band.frequency.setValueAtTime(720, t0);
-    band.frequency.exponentialRampToValueAtTime(180, t0 + duration);
+    const source = ctx.createBufferSource();
+    const filter = ctx.createBiquadFilter();
     const gain = ctx.createGain();
-    gain.gain.setValueAtTime(0.0001, t0);
-    gain.gain.exponentialRampToValueAtTime(0.9, t0 + 0.08);
-    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
-    noise.connect(band);
-    band.connect(gain);
+    source.buffer = noise;
+    filter.type = "bandpass";
+    filter.Q.value = 0.7;
+    filter.frequency.setValueAtTime(720, now);
+    filter.frequency.exponentialRampToValueAtTime(180, now + 0.55);
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(0.9, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    source.connect(filter);
+    filter.connect(gain);
     gain.connect(ctx.destination);
-    noise.start(t0);
-    noise.stop(t0 + duration);
+    source.start(now);
+    source.stop(now + duration + 0.02);
 
-    for (const [from, to, level] of [
-      [150, 62, 0.07],
-      [300, 124, 0.05],
+    for (const [startHz, endHz, volume] of [
+      [150, 62, 0.28],
+      [300, 124, 0.16],
     ] as const) {
-      const tone = ctx.createOscillator();
-      tone.type = "square";
-      tone.frequency.setValueAtTime(from, t0);
-      tone.frequency.exponentialRampToValueAtTime(to, t0 + duration);
-      const toneGain = ctx.createGain();
-      toneGain.gain.setValueAtTime(level, t0);
-      toneGain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
-      tone.connect(toneGain);
-      toneGain.connect(ctx.destination);
-      tone.start(t0);
-      tone.stop(t0 + duration);
+      const osc = ctx.createOscillator();
+      const oscGain = ctx.createGain();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(startHz, now);
+      osc.frequency.exponentialRampToValueAtTime(endHz, now + 0.55);
+      oscGain.gain.setValueAtTime(0.001, now);
+      oscGain.gain.exponentialRampToValueAtTime(volume, now + 0.025);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.58);
+      osc.connect(oscGain);
+      oscGain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.6);
     }
-  } catch {
-    /* Keep the question moving if the browser blocks audio. */
-  }
+  });
 }
